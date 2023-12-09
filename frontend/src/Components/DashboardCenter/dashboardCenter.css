@@ -1,0 +1,316 @@
+.dashboardContainer {
+  /* border: 1px solid red; */
+  width: 55vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/* <------#dashboard_box_1 left side-----------> */
+
+#dashboard_box_1 {
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: var(--color-dashboard-overview-bg);
+  padding: 30px;
+  margin: 5px 0;
+  border-radius: 20px;
+  box-shadow: 0 5px 10px 5px rgb(214, 214, 214);
+}
+
+#dashboard_box_1 .dashboard_box_1_leftSide {
+  font-family: "Mina", sans-serif;
+}
+
+#dashboard_box_1 .dashboard_box_1_leftSide h3 {
+  font-size: 5vmin;
+  color: var(--color-dashboard-overview-color);
+}
+
+#dashboard_box_1 .dashboard_box_1_leftSide > h1 {
+  font-size: 2.5vmax;
+  color: var(--color-dashboard-overview-color);
+}
+
+#dashboard_box_1 .dashboard_box_1_leftSide > h4 {
+  font-size: 2.3vmin;
+  color: var(--color-dashboard-overview-color);
+}
+
+/*todo <------#dashboard_box_1 right side-----------> */
+
+#dashboard_box_1 .dashboard_box_1_rightSide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5vmax 2vmax;
+  border-radius: 30px;
+  background-color: var(--color-dashboard-overview-icon-bg);
+  color: var(--color-dashboard-overview-icon-color);
+}
+
+#dashboard_box_1 .dashboard_box_1_rightSide > button > svg {
+  font-size: 30px;
+}
+
+/*todo <------budget_Box-----------> */
+
+#dashboard_budget_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-decoration: none;
+  background-color: var(--color-dashboard-budget-bg);
+  border-radius: 20px;
+  margin-top: 10px;
+  padding: 25px 35px;
+  /* border: 1px solid black; */
+  box-shadow: 0 5px 10px 5px rgb(228, 227, 227);
+}
+
+#dashboard_budget_box .css-eglki6-MuiLinearProgress-root {
+  height: 1vmin;
+  border-radius: 50px;
+  margin: 1.5vmin;
+  /* z-index: -10; */
+  color: blueviolet;
+}
+
+/* <----------- Remaining Bar */
+
+.css-eglki6-MuiLinearProgress-root {
+  background-color: var(
+    --color-dashboard-budget-Remaining-bar-color
+  ) !important;
+}
+
+/* <----------------  occupied bar */
+.css-5xe99f-MuiLinearProgress-bar1 {
+  background-color: var(--color-dashboard-budget-occupied-bar-color) !important;
+}
+
+#dashboard_budget_box > h2 {
+  font-family: "Mina", sans-serif;
+  font-size: 3.3vmin;
+  color: var(--color-dashboard-budget-color);
+}
+
+#dashboard_budget_box > h3 {
+  font-family: "Mina", sans-serif;
+  align-self: flex-end;
+  font-size: 2.5vmin;
+  color: var(--color-dashboard-budget-color);
+}
+
+/*todo <------ detailsInPercentage_box -----------> */
+
+#detailsInPercentage_box {
+  display: flex;
+  background-color: var(--color-dashboard-percentage-bg);
+  justify-content: space-around;
+  margin: 15px 0;
+  padding: 15px;
+  border-radius: 20px;
+  /* border: 1px solid rgb(151, 151, 151); */
+  box-shadow: 5px 0px 50px 0px rgb(209, 209, 209);
+}
+
+#detailsInPercentage_box > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+#base{
+  font-size: 3.5vmin !important; 
+  padding: 1vmax;
+
+}
+
+#detailsInPercentage_box > div h2,
+p {
+  font-family: "Mina", sans-serif;
+}
+
+#detailsInPercentage_box > div h2 {
+  font-family: "Mina", sans-serif;
+  font-size: 2.8vmin;
+  font-weight: 800;
+  color: var(--color-dashboard-percentage-color);
+}
+
+#detailsInPercentage_box > div p {
+  font-family: "Mina", sans-serif;
+  font-size: 3vmin;
+}
+
+.income_p_percentage {
+  color: var(--color-dashboard-income-percentage-color);
+}
+
+.expense_p_percentage {
+  color: var(--color-dashboard-expense-percentage-color);
+}
+
+.balance_p_percentage {
+  color: var(--color-dashboard-balance-percentage-color);
+}
+
+/*todo <---------------------   actionAndDetails_box   -------> */
+
+#actionAndDetails_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px 0;
+  gap: 10px;
+  border-radius: 20px;
+  background-color: var(--color-dashboard-Icon-bg);
+  /* box-shadow: 0 5px 10px 5px rgb(228, 227, 227); */
+}
+
+#actionAndDetails_box > a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 150px;
+  min-height: 150px;
+  /* margin: 10px; */
+  width: 26vmin;
+  height: 26vmin;
+  font-family: "Mina", sans-serif;
+  border: 5px solid white;
+  border-radius: 10px;
+  background-color: var(--color-dashboard-Icon-box-bg);
+  text-decoration: none;
+  transition: 0.5s ease;
+}
+
+#actionAndDetails_box > a:hover {
+  box-shadow: 0 0px 10px 0px rgb(218, 216, 216);
+  /* box-shadow: 0px 3px 5px black; */
+  scale: 1.05;
+  cursor: pointer;
+}
+
+#actionAndDetails_box > a > h2 {
+  font-size: 2.6vmin;
+  color: var(--color-dashboard-Icon-box-color);
+}
+
+#actionAndDetails_box .css-i4bv87-MuiSvgIcon-root {
+  font-size: 5vmin;
+  color: var(--color-dashboard-Icon-color);
+}
+
+#actionAndDetails_box > a > h2,
+.css-i4bv87-MuiSvgIcon-root {
+  margin: 8px 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .dashboardContainer {
+    width: 70vw;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .dashboardContainer {
+    width: 90vw;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  #dashboard_box_1 .dashboard_box_1_rightSide {
+    border-radius: 30px;
+  }
+
+  #dashboard_box_1 .dashboard_box_1_rightSide > button > svg {
+    font-size: 20px;
+  }
+
+  #dashboard_box_1 .dashboard_box_1_leftSide h3 {
+    font-size: 5vmin;
+    color: var(--color-dashboard-overview-color);
+  }
+
+  #dashboard_box_1 .dashboard_box_1_leftSide > h1 {
+    font-size: 4.5vmax;
+    color: var(--color-dashboard-overview-color);
+  }
+
+  #dashboard_box_1 .dashboard_box_1_leftSide > h4 {
+    font-size: 3.5vmin;
+    color: var(--color-dashboard-overview-color);
+  }
+
+  #base{
+    font-size: 4.7vmin !important; 
+  
+  }
+
+  #dashboard_budget_box > h2 {
+    font-size: 4vmin;
+  }
+
+  #dashboard_budget_box > h3 {
+    font-size: 3.5vmin;
+  }
+
+  .dashboardContainer {
+    width: 100vw;
+  }
+  #detailsInPercentage_box > div h2 {
+    font-size: 4.6vmin;
+  }
+
+  #detailsInPercentage_box > div p {
+    font-size: 4vmin;
+  }
+
+  #dashboard_box_1 {
+    border-radius: 0px;
+    box-shadow: none;
+    margin: 0px 0;
+    padding: 20px;
+  }
+
+  #dashboard_budget_box {
+    border-radius: 0px;
+    margin-top: 0px;
+
+    padding: 4vmin;
+    box-shadow: none;
+  }
+
+  #actionAndDetails_box {
+    border-radius: 0px;
+  }
+
+  #detailsInPercentage_box {
+    margin: 0px 0;
+    padding: 15px;
+    border-radius: 0px;
+    /* border-top: 1px solid rgb(207, 207, 207); */
+    border-top: 1px solid rgb(207, 207, 207);
+    border-bottom: 1px solid rgb(207, 207, 207);
+
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #actionAndDetails_box > a > h2 {
+    font-size: 4vmin;
+  }
+
+  #actionAndDetails_box .css-i4bv87-MuiSvgIcon-root {
+    font-size: 8vmin;
+  }
+}

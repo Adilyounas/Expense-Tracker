@@ -1,0 +1,97 @@
+#manu_major_Container {
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  min-width: 300px;
+  height: 100vh;
+  /* border: 1px solid rgb(253, 0, 0); */
+  /* display: none; */
+}
+
+.manu_Container {
+  padding: 0 10px;
+  background-color: var(--color-menu-bg);
+  height: 100%;
+}
+
+/* <------------- LOGO */
+
+.manu_Container > a {
+  text-decoration: none;
+  color: var(--color-menu-color);
+  font-family: "Mina", sans-serif;
+}
+
+.logoSection {
+  font-family: "Mina", sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 2.6vmax 0;
+  gap: 13px;
+  border-bottom:1px solid var(--color-menu-color);
+  transition: 0.5s ease;
+}
+
+.logoSection:hover {
+  scale: 1.03;
+}
+
+
+.logoSection > img {
+  width: 80px;
+}
+
+.manu_Container .logoSection > div > span {
+  font-size: 20px;
+  letter-spacing: 5px;
+  font-weight: bolder;
+}
+
+.detailSetting {
+  height: 100%;
+  /* border: 1px solid red; */
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 2.5vmax 0;
+}
+
+.detailSetting > div {
+  display: flex;
+  /* justify-content: flex-start; */
+  /* align-items: flex-start; */
+  /* border: 1px solid red; */
+  /* justify-content: space-between; */
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  transition: 0.5s ease;
+  border-radius: 7px;
+}
+
+.detailSetting > div > svg {
+  font-size: 30px;
+  color: var(--color-menu-Icon-color);
+
+}
+
+.detailSetting > div:hover {
+  /* border: 1px solid red; */
+  box-shadow: 0px 3px 5px black;
+  scale: 1.04;
+  /* transform: translate(50px,10px); */
+  cursor: pointer;
+  background-color: var(--color-menu-bg);
+}
+
+.detailSetting > div > a {
+  text-decoration: none;
+  color: black;
+  font-family: "Mina", sans-serif;
+  font-size: 20px;
+  padding: 0 15px;
+  margin-bottom: -2px;
+}

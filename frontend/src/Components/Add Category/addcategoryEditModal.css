@@ -1,0 +1,25 @@
+.categoryEdit_MajorContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+.addCategoryEditngDialog{
+    min-width: 350px;
+    max-width: 350px;
+    height: 25vh;
+    padding: 0vmax 2vmax;
+    display: flex;
+   flex-direction: column;
+   justify-content: center;
+    
+}
+
+
+/* .addCategoryEditngDialog  input{
+  margin: 0 2vmax;
+} */

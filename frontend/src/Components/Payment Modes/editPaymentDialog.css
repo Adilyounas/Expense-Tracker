@@ -1,0 +1,22 @@
+.paymentmodeEditDialog_major{
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid red; */
+    border-radius: 10px;
+}
+
+.paymentModeEditngDialog{
+    min-width: 350px;
+    max-width: 350px;
+    /* height: 25vh; */
+    padding: 0vmax 2vmax;
+    display: flex;
+   flex-direction: column;
+   justify-content: center;
+    
+}
+
+

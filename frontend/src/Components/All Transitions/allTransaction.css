@@ -1,0 +1,232 @@
+#allTransaction_Major_Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.allTransactions {
+  width: 50vw;
+  min-height: 100vh;
+  /* border: 1px solid red; */
+  padding: 3vmax;
+}
+
+.alltransaction-title {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.alltransaction-title > span:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+  /* border: 1px solid red; */
+  width: 100%;
+  padding: 0.7vmax 1.5vmax;
+}
+
+.alltransaction-title > span:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* border: 1px solid red; */
+  padding: 0.7vmax 1.5vmax;
+}
+
+
+
+.alltransaction-title > span:nth-child(2) > a {
+  margin: 0 10px;
+}
+
+.alltransaction-title > span > a > svg {
+  color: var(--color-alltransiton-Icon-color);
+  font-size: 35px;
+}
+
+/* <---------------------- */
+
+.alltransactions-body {
+}
+.alltransactions-body > h3 {
+  font-size: 3vmin;
+  font-family: "Mina", sans-serif;
+  background-color: var(--color-alltransiton-heading-bg);
+  color: var(--color-alltransiton-color);
+  padding: 1vmax 0;
+  text-align: center;
+  border-radius: 7px;
+}
+
+.alltransactions-body a {
+  margin: 1vmax 0;
+  text-decoration: none;
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+ color: var(--color-alltransiton-color);
+ background-color: var(--color-alltransiton-bg);
+  padding: 0 1vmax;
+  height: 13vmin;
+  border-radius: 7px;
+  transition: 0.4s ease;
+  box-shadow: 0px 1px 5px 0px rgb(165, 164, 164);
+}
+
+.alltransactions-body a:hover {
+  /* box-shadow: 0px 1px 5px 0px rgb(124, 124, 124); */
+  scale: 1.03;
+}
+
+.alltransactions-body > a > span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.transaction_date-Icon {
+  height: 10vmin;
+  width: 10vmin;
+  border-radius: 50%;
+  background-color: black;
+  /* border: 1px solid red */
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.transaction_date-Icon > p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-size: 3.5vmin;
+  color: whitesmoke;
+}
+
+.transaction-Details {
+  margin: 0 1vmax;
+}
+
+.transaction-Details > p {
+  font-family: "Mina", sans-serif;
+}
+
+.transaction-Details .p1-price {
+  font-size: 3vmin;
+  margin: 2px 0;
+}
+
+.transaction-Details .p2-des {
+  font-size: 2.5vmin;
+}
+
+.alltransactions-body a > svg {
+  font-size: 6vmin;
+  /* color: red; */
+}
+
+@media screen and (max-width: 1020px) {
+  .allTransactions {
+    width: 80vw;
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .allTransactions {
+    width: 90vw;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .alltransaction-title > span > h2 {
+    font-size: 5.5vmin;
+    margin-left: 5px;
+  }
+
+  .transaction-Details .p1-price {
+    font-size: 4vmin;
+  }
+
+  .transaction-Details .p2-des {
+    font-size: 3vmin;
+  }
+
+  .alltransactions-body a {
+    padding: 0 2vmax;
+    height: 100px;
+  }
+
+  .transaction-Details {
+    margin: 0 2vmax;
+  }
+
+  .transaction_date-Icon {
+    height: 12vmin;
+    width: 12vmin;
+  }
+
+  .transaction_date-Icon > p {
+    font-size: 4vmin;
+  }
+
+  .allTransactions {
+    padding: 2vmax;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .allTransactions {
+    width: 95vw;
+  }
+
+  .alltransaction-title > span > h2 {
+    font-size: 2.7vmax;
+    /* margin-left: 0px; */
+  }
+
+  .spanlinks > a > svg {
+    font-size: 30px !important;
+    color: red;
+  }
+
+  .alltransactions-body > h3 {
+    font-size: 4vmin;
+    padding: 2.2vmin 0;
+  }
+
+  .transaction-Details .p1-price {
+    font-size: 5vmin;
+  }
+
+  .transaction-Details .p2-des {
+    font-size: 3.5vmin;
+  }
+
+  .alltransactions-body a {
+    padding: 0 2vmax;
+    height: 80px;
+  }
+
+  .transaction-Details {
+    margin: 0 2vmax;
+  }
+
+  .transaction_date-Icon {
+    height: 13vmin;
+    width: 13vmin;
+  }
+
+  .transaction_date-Icon > p {
+    font-size: 4.5vmin;
+  }
+}
+
+
+

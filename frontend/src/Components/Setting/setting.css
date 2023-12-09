@@ -1,0 +1,52 @@
+#setting_body {
+}
+
+#setting_body > div {
+  margin: 18px 0;
+  border: 1px solid black;
+  padding: 1.7vmax;
+  border-radius: 7px;
+}
+
+.two_spans {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.two_spans > span > h3 {
+  font-family: "Mina", sans-serif;
+  font-size: 3vmin;
+}
+
+.two_spans > span > p {
+  font-family: "Mina", sans-serif;
+}
+
+.two_spans > span > svg {
+  font-size: 32px;
+}
+
+.setCurrency {
+}
+
+.setCurrency > h3 {
+  font-family: "Mina", sans-serif;
+}
+
+@media screen and (max-width: 670px) {
+  .two_spans > span > h3 {
+    font-family: "Mina", sans-serif;
+    font-size: 4.2vmin;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .two_spans > span > h3 {
+    font-size: 4.7vmin;
+  }
+
+  #setting_title > span #headingCharm {
+    font-size: 6vmin;
+  }
+}

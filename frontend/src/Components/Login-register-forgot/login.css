@@ -1,0 +1,143 @@
+#login_Major_container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100vh;
+  /* border: 1px solid red; */
+  position: relative;
+}
+
+.login_Major_container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100vh;
+  /* border: 1px solid red; */
+  position: relative;
+}
+
+.loginContainer {
+  width: 30vw;
+  z-index: 1;
+  /* border: 1px solid red; */
+  /* height: 70vh; */
+  padding: 2vmax;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.login_Heading {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: var(--color-login-bg);
+  border-radius: 7px;
+  gap: 10px;
+}
+
+
+.login_Heading > a {
+  text-decoration: none;
+  color: black;
+}
+
+.login_Heading > a > svg {
+  font-size: 40px;
+  color:var(--color-login-Icon-color) ;
+}
+
+.login_body {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 1vmax;
+}
+
+.login_Links {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  /* gap: 10px;s */
+}
+
+.login_Links > a {
+  text-decoration: none;
+  font-size: 18px;
+  font-family: "Mina", sans-serif;
+}
+
+
+
+
+/* login button  */
+.login_body .css-1rwt2y5-MuiButtonBase-root-MuiButton-root{
+  margin-top: 30px;
+  font-size: 18px;
+  background-color: var(--color-incomeAndExpense-color);
+  color: var(--color-incomeAndExpense-bg);
+  transition: .3s ease-in;
+}
+
+.login_body .css-1rwt2y5-MuiButtonBase-root-MuiButton-root:hover{
+  /* margin: 30px 0; */
+  font-size: 18px;
+  background-color: var(--color-incomeAndExpense-hoverbtn-color);
+  color: var(--color-incomeAndExpense-color);
+  scale: .97;
+
+}
+
+
+
+
+
+
+@media screen and (max-width: 1300px) {
+  .loginContainer {
+    width: 40vw;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .loginContainer {
+    width: 50vw;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .loginContainer {
+    width: 70vw;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .loginContainer {
+    width: 95vw;
+  }
+  .login_body > .css-wb57ya-MuiFormControl-root-MuiTextField-root {
+    margin: 7px 0;
+  }
+
+  .login_Heading > h2 {
+    font-family: "Mina", sans-serif;
+    font-size: 6vmin !important;
+  }
+
+  .login_Major_container {
+   
+    align-content: flex-start;
+    margin-top: 8vmin;
+    
+  }
+}
+
+
+
+
+

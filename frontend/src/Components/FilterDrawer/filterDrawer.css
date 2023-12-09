@@ -1,0 +1,106 @@
+#filterDrawer_Major_Container {
+  min-width: 350px;
+  max-width: 350px;
+  /* border: 1px solid red; */
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  background-color: var(--color-alltransiton-filters-bg);
+  overflow-y: auto;
+  box-sizing: border-box;
+  height: 100vh;
+  /* display: none; */
+  z-index: 3;
+}
+
+#filterDrawer_Major_Container::-webkit-scrollbar {
+  width: 7px;
+}
+
+#filterDrawer_Major_Container::-webkit-scrollbar-thumb {
+  background-color: var(--color-alltransiton-filters-color);
+  border-radius: 50px;
+}
+
+#filterDrawer_Major_Container::-webkit-scrollbar-thumb:hover {
+  background-color: #000000;
+}
+
+#filterDrawer_Major_Container::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+.filterDrawer >div{
+  padding:0 1.3vmax;
+}
+
+
+#filterDrawer_Action_btn_Div{
+  padding: 1vmax;
+}
+
+#filterDrawer_Action_btn_Div >  svg {
+  font-size: 40px;
+  color: var(--color-alltransiton-filters-Icon-color);
+}
+
+#filterDrawer_Action_btn_Div >  svg:hover {
+  color: var(--color-alltransiton-filters-Icon-hover-color);
+  cursor: pointer;
+}
+
+.filterDrawer > h2 {
+  text-align: center;
+  font-family: "Mina", sans-serif;
+  background-color: var(--color-alltransiton-filters-heading-bg);
+  color: var(--color-alltransiton-filters-color);
+  font-size: 21px;
+  padding: .7vmax 0;
+}
+
+/* radio group container */
+
+#radioBoxes_container {
+  width: 100% !important;
+}
+
+#radioBoxes_container .css-1nrlq1o-MuiFormControl-root {
+  width: 100%;
+}
+
+#radioBoxes_container .css-dmmspl-MuiFormGroup-root {
+  flex-direction: row !important;
+  width: 100%;
+}
+
+/* radio lable measn singel value with name */
+
+#radioBoxes_container .css-j204z7-MuiFormControlLabel-root {
+  width: 50%;
+  /* border: 1px solid red; */
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+#radioBoxes_container .MuiSvgIcon-root {
+  font-size: 18px !important;
+}
+
+/*TODO <---------------  BETWEEN DATES  --------------> */
+
+.beteenDate_from {
+  display: flex;
+  /* gap: 15px; */
+  flex-direction: column;
+}
+
+.beteenDate_from > h3 {
+  padding: .5vmax;
+  font-family: "Mina", sans-serif;
+}
+
+@media screen and (max-width: 620px) {
+  #filterDrawer_Major_Container {
+    height: calc(100vh - 60px);
+  }
+}

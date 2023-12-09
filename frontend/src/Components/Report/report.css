@@ -1,0 +1,66 @@
+.MuiPieArcLabel-root {
+  transform: translate(0px) !important;
+  font-size: 1.6rem;
+}
+
+.css-1u0lry5-MuiChartsLegend-root {
+  transform: translate(-20%, 0%);
+  position: absolute;
+  top: 0%;
+  right: 0%;
+}
+
+#expenseReport {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.incomeReport {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.reportPageTitle {
+  font-size: 1.5rem;
+
+  font-family: "Mina", sans-serif;
+}
+
+.ReportPagefilterIcon {
+  color: var(--color-dashboard-overview-icon-bg);
+  scale: 1.52;
+  cursor: pointer;
+}
+
+#expenseAccordian {
+  width: 40%;
+}
+
+#expenseAccordianTitle {
+  font-size: 1.5rem;
+  font-family: "Mina", sans-serif;
+}
+
+#expenseAccordianSummary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#expenseAccordianSummary > span {
+  font-family: "Mina", sans-serif;
+}
+
+@media screen and (max-width: 900px) {
+  
+    .css-1u0lry5-MuiChartsLegend-root {
+        transform: translate(-20%, -37%);
+      }
+  #expenseAccordian {
+    width: 80%;
+  }
+}

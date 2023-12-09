@@ -1,0 +1,108 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Mina:wght@400;700&family=Shrikhand&display=swap');
+
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: var(--color-menu-bg);
+}
+
+
+/*TODO <--------------------  DATE AND TIME CLASSES   -----------------> */
+
+.react-datetime-picker {
+  width: 100%;
+}
+
+.react-datetime-picker__wrapper {
+  font-size: 18px;
+  display: flex;
+  flex-grow: 5;
+  min-height: 50px;
+  /* padding: 0 1vmax; */
+}
+
+.react-datetime-picker__inputGroup__amPm {
+  /* margin: 0 20px; */
+}
+
+
+
+/*TODO <-------------------- Dashboard  -----------------> */
+
+
+:root {
+  
+  --color-dashboard-overview-bg: #023047;   /* done */
+  --color-dashboard-overview-color: #fbfbfd;   /* done */
+
+  --color-dashboard-overview-icon-bg: #FB8500;  /* done */
+  /* --color-dashboard-overview-icon-color: #533a26;  */
+
+  --color-dashboard-budget-bg: #fbfbfd; /* done */
+  --color-dashboard-budget-color: #1d1d1f;  /* done */
+  --color-dashboard-budget-Remaining-bar-color: #D90429;  /* done */
+  --color-dashboard-budget-occupied-bar-color: #FB8500;  /* done */
+
+
+  
+  --color-dashboard-percentage-color: #1d1d1f; /* done */
+  --color-dashboard-percentage-bg: #fbfbfd; /* done */
+  --color-dashboard-income-percentage-color: #019985; 
+  --color-dashboard-expense-percentage-color: #D90429; 
+  --color-dashboard-balance-percentage-color: #008afc; 
+
+
+  --color-dashboard-Icon-bg: none; 
+  --color-dashboard-Icon-box-bg: #1d1d1f; 
+
+  --color-dashboard-Icon-box-color: #fbfbfd; 
+  --color-dashboard-Icon-color: #FB8500; 
+
+
+/* <----------------------------- MENU */
+
+
+--color-menu-bg: #fbfbfd;
+--color-menu-color: #1d1d1f;
+--color-menu-Icon-color: #FB8500;
+
+
+--color-incomeAndExpense-bg: #fbfbfd;
+--color-incomeAndExpense-color: #1d1d1f;
+--color-incomeAndExpense-hoverbtn-color: #e6e6e6;
+
+--color-incomeAndExpense-Icon-color: #e96a6a;
+
+
+--color-login-bg: #fbfbfd;
+--color-login-color: #1d1d1f;
+--color-login-hoverbtn-color: #e6e6e6;
+--color-login-Icon-color: #FB8500;
+
+
+
+--color-alltransiton-Icon-color: #e96a6a;
+--color-alltransiton-heading-bg: #f0f0f0;
+--color-alltransiton-bg: #fbfbfd;
+
+--color-alltransiton-color: #1d1d1f;
+
+
+
+/* <--------------   all transactions filters  */
+
+--color-alltransiton-filters-Icon-color: #e96a6a;
+--color-alltransiton-filters-Icon-hover-color: #fa8e8e;
+
+--color-alltransiton-filters-heading-bg: #eceaea;
+--color-alltransiton-filters-bg: #fbfbfd;
+
+--color-alltransiton-filters-color: #1d1d1f;
+
+}

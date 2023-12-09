@@ -1,0 +1,28 @@
+.registerContainer {
+  align-items: flex-start !important;
+}
+
+.regiser_body {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+  /* margin-top: 1vmax; */
+}
+
+/* login button  */
+.regiser_body .css-sghohy-MuiButtonBase-root-MuiButton-root {
+  margin-top: 30px;
+  font-size: 18px;
+  background-color: var(--color-incomeAndExpense-color);
+  color: var(--color-incomeAndExpense-bg);
+  transition: 0.3s ease-in;
+}
+
+.regiser_body .css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
+  /* margin: 30px 0; */
+  font-size: 18px;
+  background-color: var(--color-incomeAndExpense-hoverbtn-color);
+  color: var(--color-incomeAndExpense-color);
+  scale: 0.97;
+}

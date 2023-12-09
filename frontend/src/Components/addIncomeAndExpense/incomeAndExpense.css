@@ -1,0 +1,149 @@
+/*TODO <--------------------  ADD INCOME MAJOR   -----------------> */
+
+#addIncome_Major_Container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.income_Container {
+  /* padding: 3vmax; */
+  min-width: 400px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  /* padding: 2vmax; */
+  /* border: 1px solid var(--color-incomeAndExpense-color); */
+  /* border-radius: 10px; */
+  /* box-shadow: 0 2px 50px 0 rgb(228, 228, 228); */
+}
+
+.income_Container div:not(:first-child){
+  margin: 10px 0;
+}
+
+/*TODO <--------------------  major child  -----------------> */
+
+
+
+
+.income_Container #incomePageTitle {
+  color: var(--color-incomeAndExpense-color);
+  background-color: var(--color-incomeAndExpense-bg);
+  /* padding: 0 1vmax; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+
+
+.income_Container #editTransactionPage {
+  color: var(--color-incomeAndExpense-color);
+  background-color: var(--color-incomeAndExpense-bg);
+  /* padding: 0 1vmax; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+/* #editTransaction_DeleteIcon{
+  align-self: flex-end;
+  margin-left: 5vmin;
+} */
+
+ #editTransactionPage > span> a {
+  /* font-size: 40px; */
+  text-decoration: none;
+  
+  /* margin-right: 10px; */
+}
+
+#editTransactionPage > span> a >svg {
+  font-size: 35px;
+  text-decoration: none;
+  
+  
+  color: var(--color-incomeAndExpense-Icon-color);
+}
+
+#editTransaction_DeleteIcon> svg {
+  color: var(--color-incomeAndExpense-Icon-color);
+  font-size: 30px;
+}
+
+#editTransaction_DeleteIcon>svg:hover {
+  color: red;
+  scale: 1.2;
+}
+
+
+
+
+/* ///////////////////////// */
+
+.income_Container #incomePageTitle > a {
+  /* font-size: 40px; */
+  text-decoration: none;
+  color: var(--color-incomeAndExpense-Icon-color);
+
+  /* margin-right: 10px; */
+}
+
+.income_Container #incomePageTitle >a > svg {
+  font-size: 35px;
+  color: var(--color-incomeAndExpense-Icon-color);
+}
+
+
+.income_Container > div > p {
+  padding: 0.5vmax 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.income_Container .css-1rwt2y5-MuiButtonBase-root-MuiButton-root {
+  margin-top: 30px;
+  font-size: 18px;
+  background-color: var(--color-incomeAndExpense-color);
+  color: var(--color-incomeAndExpense-bg);
+  transition: 0.3s ease-in;
+}
+
+.income_Container .css-1rwt2y5-MuiButtonBase-root-MuiButton-root:hover {
+  /* margin: 30px 0; */
+  font-size: 18px;
+  background-color: var(--color-incomeAndExpense-hoverbtn-color);
+  color: var(--color-incomeAndExpense-color);
+  scale: 0.97;
+}
+
+/* <-------------------  addincome page buttton  */
+
+.income_Container .css-sghohy-MuiButtonBase-root-MuiButton-root {
+  margin-top: 30px;
+  font-size: 18px;
+  background-color: var(--color-incomeAndExpense-color);
+  color: var(--color-incomeAndExpense-bg);
+  transition: 0.3s ease-in;
+}
+
+.income_Container .css-sghohy-MuiButtonBase-root-MuiButton-root:hover {
+  /* margin: 30px 0; */
+  font-size: 18px;
+  background-color: var(--color-incomeAndExpense-hoverbtn-color);
+  color: var(--color-incomeAndExpense-color);
+  scale: 0.97;
+}
+
+
+@media screen and (max-width:670px) {
+  #editTransaction_DeleteIcon{
+    margin-left: 25vmin;
+  }
+  
+}
