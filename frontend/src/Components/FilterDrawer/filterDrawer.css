@@ -10,6 +10,8 @@
   box-sizing: border-box;
   height: 100vh;
   /* display: none; */
+  padding-bottom: 80px;
+
   z-index: 3;
 }
 
@@ -99,9 +101,8 @@
   font-family: "Mina", sans-serif;
 }
 
-@media screen and (max-width: 620px) {
+/* @media screen and (max-width: 620px) {
   #filterDrawer_Major_Container {
-    /* height: calc(100vh - 60px); */
     padding-bottom: 80px;
   }
-}
+} */

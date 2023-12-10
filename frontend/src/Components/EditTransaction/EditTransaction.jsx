@@ -17,7 +17,7 @@ import "react-calendar/dist/Calendar.css";
 import "react-clock/dist/Clock.css";
 //REACT ROUTER DOM
 import { NavLink } from "react-router-dom";
-import { useParams,useNavigate  } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 //TODO <---------  COMPONENTS FORM OTHER FILES ------------------>
 
 import Loading from "../Loading/Loading";
@@ -29,8 +29,8 @@ import { useDispatch, useSelector } from "react-redux";
 import singleTransactionAction from "../../Redux/Actions/singleTransaction";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import {deleteTransactionReducer} from "../../Redux/Slice/deleteTransaction";
-
+import { deleteTransactionReducer } from "../../Redux/Slice/deleteTransaction";
+import DeleteTransaction from "./DeleteTransaction";
 
 //TODO <------------  COMPONENT START FORM HERE  ---------------------->
 
@@ -53,11 +53,21 @@ const EditTransaction = () => {
   const { deleteTransactionSuccess } = useSelector(
     (state) => state.DeleteSingleTransactionSlice
   );
- 
 
   //TODO <------------  USESTATE HOOKS  ---------------------->
 
   const [dateAndTimeValue, setDateAndTimeValue] = useState(new Date());
+
+  const [deleteTransactionDialogOpen, setDeleteTransactionDialogOpen] =
+    useState(false);
+
+  const deleteTransactionDialogOpenHandler = () => {
+    setDeleteTransactionDialogOpen(!deleteTransactionDialogOpen);
+  };
+
+  const deleteTransactionConfirmedHandler = () => {
+    dispatch(deleteTransactionAction(id));
+  };
 
   let [incomeData, setIncomeData] = useState({
     amount: "",
@@ -102,22 +112,14 @@ const EditTransaction = () => {
     dispatch(updateTransaction(incomeData, id));
   };
 
-  const deleteTransaction = ()=>{
-    dispatch(deleteTransactionAction(id));
-
-  }
-
   useEffect(() => {
-   
     dispatch(singleTransactionAction(id));
 
-    if (deleteTransactionSuccess===true) {
+    if (deleteTransactionSuccess === true) {
       navigate(-1);
-    dispatch(deleteTransactionReducer(false))
-
+      dispatch(deleteTransactionReducer(false));
     }
-    
-  }, [dispatch, id,deleteTransactionSuccess,navigate]);
+  }, [dispatch, id, deleteTransactionSuccess, navigate]);
 
   return (
     <>
@@ -132,13 +134,24 @@ const EditTransaction = () => {
               justifyContent={"space-between"}
               component={"div"}
             >
-              <span style={{display:"flex",justifyContent:"space-between", alignItems:"center"}}>
-              <NavLink to={"/allTransitions"}>
-                <KeyboardBackspaceIcon />
-              </NavLink>
-              <h2 style={{marginLeft:"10px"}} id="headingCharm">Edit Transaction</h2>
+              <span
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <NavLink to={"/allTransitions"}>
+                  <KeyboardBackspaceIcon />
+                </NavLink>
+                <h2 style={{ marginLeft: "10px" }} id="headingCharm">
+                  Edit Transaction
+                </h2>
               </span>
-              <NavLink id="editTransaction_DeleteIcon" onClick={deleteTransaction}>
+              <NavLink
+                id="editTransaction_DeleteIcon"
+                onClick={deleteTransactionDialogOpenHandler}
+              >
                 <DeleteIcon />
               </NavLink>
             </Box>
@@ -229,6 +242,15 @@ const EditTransaction = () => {
               Edit
             </Button>
           </form>
+          <DeleteTransaction
+            deleteTransactionDialogOpen={deleteTransactionDialogOpen}
+            deleteTransactionDialogOpenHandler={
+              deleteTransactionDialogOpenHandler
+            }
+            deleteTransactionConfirmedHandler={
+              deleteTransactionConfirmedHandler
+            }
+          />
         </Box>
       ) : (
         ""

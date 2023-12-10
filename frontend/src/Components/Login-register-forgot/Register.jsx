@@ -9,6 +9,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import registerAction from "../../Redux/Actions/registerAction";
 import { useDispatch, useSelector } from "react-redux";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -31,15 +32,20 @@ const Register = () => {
 
   const registerFormSubmitHandler = (e) => {
     e.preventDefault();
+    if (registerData.password===registerData.confirmPassword) {
+      dispatch(registerAction(registerData,navigate));
+  
+      setRegisterData({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+      
+    }else{
+      toast.error("Enter Same Password")
+    }
 
-    dispatch(registerAction(registerData));
-
-    setRegisterData({
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
   };
 
   useEffect(() => {

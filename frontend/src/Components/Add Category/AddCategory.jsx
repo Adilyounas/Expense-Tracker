@@ -1,15 +1,23 @@
 import React, { useState } from "react";
-import { Box } from "@mui/material";
-import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import "./addCategory.css";
-import { NavLink } from "react-router-dom";
 
-// import SearchIcon from "@mui/icons-material/Search";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AddCategoryModel from "./AddCategoryModel";
-import AddNewDialog from "./AddNewDialog";
+  //TODO <---------------  MATERIAL UI   --------------------->
+  import { Box } from "@mui/material";
+  import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+  // import SearchIcon from "@mui/icons-material/Search";
+  import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+  import EditIcon from "@mui/icons-material/Edit";
+  import DeleteIcon from "@mui/icons-material/Delete";
+  import AddCategoryModel from "./AddCategoryModel";
+  import AddNewDialog from "./AddNewDialog";
+
+  //TODO <---------------  FILE CSS   --------------------->
+  import "./addCategory.css";
+
+  //TODO <---------------  FAMOUS LIBRARIES  --------------------->
+  import { NavLink } from "react-router-dom";
+
+  //TODO <---------------  LIBRARIES FOR FUNCTIONALITY  --------------------->
+
 
 import { v4 as uuidv4 } from "uuid";
 

@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
-import "./login.css";
-import "./forgotPassword.css";
+import "../Login-register-forgot/login.css";
+import "../Login-register-forgot/forgotPassword.css";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Box, Button, TextField } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector ,useDispatch} from "react-redux";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Loading from "../Loading/Loading";
-import forgotPassword_Action from "../../Redux/Actions/forgotPassword_Action";
+import resetPassword_Action from "../../Redux/Actions/resetPassword";
 
-
-const ForgotPassword = () => {
+const RestPassword = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+  const { token } = useParams();
+
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const { userFound } = useSelector((state) => state.GetUserData);
   const { generalLoading } = useSelector((state) => state.generalLoading);
 
-  const sendEmailHandler = () => {
-    dispatch(forgotPassword_Action(email))
-    setEmail("")
+  const resetPasswordHandler = () => {
+    dispatch(resetPassword_Action(password, confirmPassword, token,navigate));
+    setPassword("");
+    setConfirmPassword("");
   };
 
   useEffect(() => {
@@ -40,27 +43,36 @@ const ForgotPassword = () => {
               <NavLink to={"/login"}>
                 <KeyboardBackspaceIcon />
               </NavLink>
-              <h2 id="headingCharm">Forgot Password</h2>
+              <h2 id="headingCharm">Reset Password</h2>
             </div>
 
             <Box className="login_body" component={"form"}>
               <TextField
-                name="email"
-                label="Email"
-                type="email"
+                name="password"
+                label="Password"
+                type="password"
                 fullWidth
-                placeholder="Enter Your Email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
+                placeholder="Enter Your Password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+              />
+              <TextField
+                name="confirmPassword"
+                label="Confirm Password"
+                type="password"
+                fullWidth
+                placeholder="Enter Your Password Again"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={confirmPassword}
               />
 
               <Button
-                onClick={sendEmailHandler}
+                onClick={resetPasswordHandler}
                 variant="contained"
                 type="submit"
                 endIcon={<SendIcon />}
               >
-                Send
+                Reset
               </Button>
             </Box>
 
@@ -75,4 +87,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default RestPassword;

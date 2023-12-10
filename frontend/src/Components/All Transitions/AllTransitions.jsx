@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FilterDrawer from "../FilterDrawer/FilterDrawer";
 import { Box } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
@@ -13,7 +13,11 @@ import Loading from "../Loading/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import getAllIncomeAndExpenses from "../../Redux/Actions/getAllinComeAndExpense";
 
+import { usePDF } from "react-to-pdf";
+
 const AllTransitions = () => {
+  const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
+
   // const currencyVal = JSON.parse(localStorage.getItem("currencyVal"))
   const currencySymbol = JSON.parse(localStorage.getItem("currencySymbol"));
 
@@ -38,7 +42,7 @@ const AllTransitions = () => {
         <Loading />
       ) : (
         <>
-          <div id="allTransaction_Major_Container">
+          <div id="allTransaction_Major_Container" ref={targetRef}>
             <div className="allTransactions">
               <Box className="alltransaction-title">
                 <span>
@@ -52,7 +56,7 @@ const AllTransitions = () => {
                   <NavLink onClick={filterDrawerOpenCloseHandler}>
                     <FilterAltIcon />
                   </NavLink>
-                  <NavLink>
+                  <NavLink onClick={() => toPDF()}>
                     <ShortcutIcon />
                   </NavLink>
                 </span>
@@ -60,7 +64,8 @@ const AllTransitions = () => {
 
               {/* ele.enteryMonth=== new Date(transaction.dateAndTime).getMonth()   */}
 
-              {allTransaction_IncomeAndExpenseArr && allTransaction_IncomeAndExpenseArr.length>0 ? (
+              {allTransaction_IncomeAndExpenseArr &&
+              allTransaction_IncomeAndExpenseArr.length > 0 ? (
                 allTransaction_IncomeAndExpenseArr.map((ele, index) => (
                   <Box className="alltransactions-body" key={ele.month}>
                     <h3>{ele.month}</h3>

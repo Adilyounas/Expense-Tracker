@@ -5,26 +5,22 @@ import {
 } from "../Slice/generalLoading";
 
 import axios from "axios";
-import { getUserDataSucess_true_Reducer } from "../../Redux/Slice/userDetails_Slice";
 
-const registerAction = (registerData,navigate) => async (dispatch) => {
+const forgotPassword_Action = (email) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
-    
+    withCredentials: true, // Set to true to include credentials
   };
+
   try {
     dispatch(generalLoadingTrue());
-    const { data } = await axios.post(`/api/v1/register`, registerData, config);
-
-    dispatch(getUserDataSucess_true_Reducer(true));
-
-
-    navigate("/")
+    const { data } = await axios.post(`/api/v1/forgotPassword`, { email }, config);
     if (data.success === true) {
       toast.success(data.message);
     }
+
 
     dispatch(generalLoadingFalse());
   } catch (error) {
@@ -34,4 +30,4 @@ const registerAction = (registerData,navigate) => async (dispatch) => {
   }
 };
 
-export default registerAction;
+export default forgotPassword_Action;

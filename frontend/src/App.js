@@ -15,6 +15,7 @@ import Report from "./Components/Report/Report";
 import getUserDetails_Action from "./Redux/Actions/getUserData";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import RestPassword from "./Components/Reset Password/RestPassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/resetPassword/:token" element={<RestPassword />} />
 
 
 
