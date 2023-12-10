@@ -61,10 +61,17 @@ const getAllIncomesAndExpense = async (req, res) => {
         } ${entry.dateAndTime.getFullYear()}`;
 
         let day = `${entry.dateAndTime.getDate()}`;
+        let enteryMonth = `${entry.dateAndTime.getMonth()}`;
+        let enteryYear = `${entry.dateAndTime.getFullYear()}`;
 
         // Create an entry for the month if it doesn't exist
         if (!groupedData[monthYear]) {
-          groupedData[monthYear] = { month: monthYear, data: [] };
+          groupedData[monthYear] = {
+            month: monthYear,
+            enteryMonth: parseInt(enteryMonth),
+            enteryYear: parseInt(enteryYear),
+            data: [],
+          };
         }
 
         // Add the entry to the array for the month
@@ -232,8 +239,7 @@ const updateTransaction = async (req, res) => {
   }
 };
 
-
-const deleteSingleTransaction = async(req, res) => {
+const deleteSingleTransaction = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -255,23 +261,66 @@ const deleteSingleTransaction = async(req, res) => {
       });
     }
 
-     res.status(404).json({
+    res.status(404).json({
       success: false,
-      message: 'Transaction not found',
+      message: "Transaction not found",
     });
-
   } catch (error) {
     res.status(500).json({
       success: false,
       message: error.message,
     });
   }
-}
+};
 
+const deleteAllUserData = async(req,res)=>{
+
+
+  try {
+    const userId = req.user._id
+
+    // Find and delete all Income transactions for the user
+    const incomeResult = await Income.deleteMany({ user:userId });
+    
+    // Find and delete all Expense transactions for the user
+    const expenseResult = await Expense.deleteMany({ user:userId });
+    
+    const totalDeletedCount = incomeResult.deletedCount + expenseResult.deletedCount;
+    
+    if (totalDeletedCount > 0) {
+      return res.status(200).json({
+        success: true,
+        message: `Deleted ${totalDeletedCount} Transactions Successfully`,
+      });
+    }
+    
+     res.status(404).json({
+      success: false,
+      message: "No Transactions Found for the Given User ID",
+    });
+    
+   
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+
+
+
+
+
+
+
+
+
+}
 
 module.exports = {
   getAllIncomesAndExpense,
   getSingleTransaction,
   updateTransaction,
-  deleteSingleTransaction
+  deleteSingleTransaction,
+  deleteAllUserData
 };

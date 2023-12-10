@@ -2,7 +2,7 @@ import React from "react";
 import "./menu.css";
 import { Box, Drawer } from "@mui/material";
 import expenseTracker from "../../Assets/logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import CategoryIcon from "@mui/icons-material/Category";
@@ -10,9 +10,20 @@ import PaymentsIcon from "@mui/icons-material/Payments";
 import PsychologyAltIcon from "@mui/icons-material/PsychologyAlt";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import logout_Action from "../../Redux/Actions/logoutAction"
+import {useDispatch} from "react-redux"
 
 const Menu = (props) => {
   const { menuDrawerOpen, menuDrawerHander } = props;
+  const dispatch = useDispatch();
+
+
+  const navigate = useNavigate();
+
+
+  const logOutHandler = ()=>{
+    dispatch(logout_Action(navigate))
+  }
 
   return (
     <Drawer open={menuDrawerOpen} onClose={menuDrawerHander}>
@@ -59,7 +70,7 @@ const Menu = (props) => {
 
             <div>
               <LogoutIcon />
-              <NavLink>Logout</NavLink>
+              <NavLink onClick={logOutHandler}>Logout</NavLink>
             </div>
           </div>
         </div>

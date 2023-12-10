@@ -80,4 +80,27 @@ const logout = async (req, res) => {
   }
 };
 
-module.exports = { register, login, logout };
+const getUserDetails = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.user._id });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { register, login, logout, getUserDetails };

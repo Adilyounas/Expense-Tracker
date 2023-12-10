@@ -101,7 +101,7 @@ const Dashboard = () => {
           date <= lastDayOfMonthDate
         ) {
           expenseSum = expenseSum + transaction.amount;
-        } 
+        }
       });
     });
   };

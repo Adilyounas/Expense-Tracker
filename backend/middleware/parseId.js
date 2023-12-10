@@ -7,7 +7,7 @@ const parseId = async (req, res, next) => {
 
     if (!token) {
       return res.status(404).json({
-        success: Boolean,
+        success: false,
         message: "Login Required",
       });
     }

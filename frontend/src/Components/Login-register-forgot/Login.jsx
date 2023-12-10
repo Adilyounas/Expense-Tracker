@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./login.css";
 // import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import { Box, Button, TextField } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { NavLink } from "react-router-dom";
 import Loading from "../Loading/Loading";
-
+import { useNavigate } from "react-router-dom";
 import loginAction from "../../Redux/Actions/loginAction";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const { generalLoading } = useSelector((state) => state.generalLoading);
-  console.log(generalLoading);
-  const dispatch = useDispatch()
+
+  const { userFound } = useSelector((state) => state.GetUserData);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
     email: "",
@@ -26,8 +29,14 @@ const Login = () => {
 
   const loginFormSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch( loginAction(data) )
+    dispatch(loginAction(data, navigate));
   };
+
+  useEffect(() => {
+    if (userFound === true) {
+      navigate("/");
+    }
+  }, [userFound, navigate]);
 
   return (
     <>

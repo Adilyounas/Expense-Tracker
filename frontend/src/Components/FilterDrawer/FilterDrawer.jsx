@@ -19,6 +19,10 @@ import activeRadioSelectionHandler from "./filteration";
 
 import {
   checkAndModified,
+  incomeAndExpensOnChangeHandler,
+  categoryRadioOnchangeHandler,
+  paymentModeRadioOnchangeHandler,
+  resetValuesHandler,
 } from "./filteration";
 
 const FilterDrawer = (props) => {
@@ -28,12 +32,17 @@ const FilterDrawer = (props) => {
     filterDrawerOpenCloseHandler,
     filtered_IncomeAndExpenseArr,
     allTransaction_IncomeAndExpenseArr,
+    resetFilterData_To_ApiFreshData_Reducer,
   } = props;
 
   const category = JSON.parse(localStorage.getItem("category"));
   const paymentMode = JSON.parse(localStorage.getItem("paymentMode"));
 
   const [activeRadioValue, setActiveRadioValue] = useState("all");
+  const [incomeAndExpenseRadio, setIncomeAndExpenseRadio] = useState("all");
+  const [categorySectionRadio, setCategorySectionRadio] = useState("all");
+  const [paymentModeSectionRadio, setPaymentModeSectionRadio] = useState("all");
+
   const [dateAndTimeValueFrom, setDateAndTimeValueFrom] = useState(new Date());
   const [dateAndTimeValueTo, setDateAndTimeValueTo] = useState(new Date());
 
@@ -60,7 +69,20 @@ const FilterDrawer = (props) => {
             //   padding={"1vmax"}
             id="filterDrawer_Action_btn_Div"
           >
-            <ReplayIcon />
+            <ReplayIcon
+              onClick={() =>
+                resetValuesHandler(
+                  dispatch,
+                  setActiveRadioValue,
+                  setDateAndTimeValueFrom,
+                  setDateAndTimeValueTo,
+                  setIncomeAndExpenseRadio,
+                  setCategorySectionRadio,
+                  setPaymentModeSectionRadio,
+                  resetFilterData_To_ApiFreshData_Reducer
+                )
+              }
+            />
             <CheckIcon
               onClick={() => {
                 filterDrawerOpenCloseHandler();
@@ -149,8 +171,17 @@ const FilterDrawer = (props) => {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="all"
                 name="radio-buttons-group"
-                value={activeRadioValue}
-                onChange={activeRadioSelectionHandler}
+                value={incomeAndExpenseRadio}
+                onChange={(event) =>
+                  incomeAndExpensOnChangeHandler(
+                    event,
+                    dispatch,
+                    filtered_IncomeAndExpenseArr,
+                    setIncomeAndExpenseRadio,
+                    modifiedData,
+                    allTransaction_IncomeAndExpenseArr
+                  )
+                }
               >
                 <FormControlLabel value="all" control={<Radio />} label="All" />
                 <FormControlLabel
@@ -174,15 +205,29 @@ const FilterDrawer = (props) => {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="all"
                 name="radio-buttons-group"
-                value={activeRadioValue}
-                onChange={activeRadioSelectionHandler}
+                value={categorySectionRadio}
+                onChange={(event) =>
+                  categoryRadioOnchangeHandler(
+                    event,
+                    dispatch,
+                    filtered_IncomeAndExpenseArr,
+                    setCategorySectionRadio,
+                    modifiedData,
+                    allTransaction_IncomeAndExpenseArr
+                  )
+                }
               >
+                <FormControlLabel
+                  value={"all"}
+                  control={<Radio />}
+                  label={"All"}
+                />
                 {category &&
                   category.length > 0 &&
                   category.map((ele) => (
                     <FormControlLabel
                       key={ele.id}
-                      value={ele.name}
+                      value={ele.value}
                       control={<Radio />}
                       label={ele.value}
                     />
@@ -198,14 +243,29 @@ const FilterDrawer = (props) => {
                 aria-labelledby="demo-radio-buttons-group-label"
                 defaultValue="all"
                 name="radio-buttons-group"
-                value={activeRadioValue}
-                onChange={activeRadioSelectionHandler}
+                value={paymentModeSectionRadio}
+                onChange={(event) =>
+                  paymentModeRadioOnchangeHandler(
+                    event,
+                    dispatch,
+                    filtered_IncomeAndExpenseArr,
+                    setPaymentModeSectionRadio,
+                    modifiedData,
+                    allTransaction_IncomeAndExpenseArr
+                  )
+                }
               >
+                <FormControlLabel
+                  value={"all"}
+                  control={<Radio />}
+                  label={"All"}
+                />
+
                 {paymentMode.length > 0 &&
                   paymentMode.map((ele) => (
                     <FormControlLabel
                       key={ele.id}
-                      value={ele.name}
+                      value={ele.value}
                       control={<Radio />}
                       label={ele.value}
                     />

@@ -12,7 +12,7 @@ const ResetSettingDialog = (props) => {
   const { resetDialogOpen, cancelResetHandler, clearSettingHandler } = props;
   return (
     <Dialog open={resetDialogOpen} onClose={cancelResetHandler}>
-      <Alert severity="warning">
+      <Alert severity="info">
         <AlertTitle color="red">Warning</AlertTitle>
         <Typography marginRight={"3vmax"}>
           This is a Clear All Your Settings — <strong>check it out!</strong>
@@ -21,7 +21,7 @@ const ResetSettingDialog = (props) => {
           <Button color="primary" onClick={cancelResetHandler}>
             Cancle
           </Button>
-          <Button color="secondary" onClick={clearSettingHandler}>
+          <Button sx={{color:"red"}} onClick={clearSettingHandler}>
             Clear
           </Button>
         </Box>

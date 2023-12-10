@@ -12,24 +12,43 @@ import SetBudget from "./Components/Set Budget/SetBudget";
 import Settings from "./Components/Setting/Setting";
 import EditTransaction from "./Components/EditTransaction/EditTransaction";
 import Report from "./Components/Report/Report";
+import getUserDetails_Action from "./Redux/Actions/getUserData";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  const { userFound } = useSelector(
+    (state) => state.GetUserData
+  );
+
+  useEffect(() => {
+    dispatch(getUserDetails_Action(0));
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/addIncome" element={<AddIncome />} />
-        <Route path="/addExpense" element={<AddExpense />} />
-        <Route path="/allTransitions" element={<AllTransitions />} />
+      
+        <Route path="/" element={ !userFound? <Login />:   <Dashboard />} />
+
+
+        <Route path="/addIncome" element={!userFound? <Login />: <AddIncome />} />
+        <Route path="/addExpense" element={!userFound? <Login />: <AddExpense />} />
+        <Route path="/allTransitions" element={!userFound? <Login />: <AllTransitions />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
-        <Route path="/addCategory" element={<AddCategory />} />
-        <Route path="/paymentModes" element={<PaymentModes />} />
-        <Route path="/setBudget" element={<SetBudget />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/allTransitions/:id" element={<EditTransaction />} />
-        <Route path="/reports" element={<Report />} />
+
+
+
+        <Route path="/addCategory" element={!userFound? <Login />: <AddCategory />} />
+        <Route path="/paymentModes" element={!userFound? <Login />: <PaymentModes />} />
+        <Route path="/setBudget" element={!userFound? <Login />: <SetBudget />} />
+        <Route path="/settings" element={!userFound? <Login />: <Settings />} />
+        <Route path="/allTransitions/:id" element={!userFound? <Login />: <EditTransaction />} />
+        <Route path="/reports" element={!userFound? <Login />: <Report />} />
       </Routes>
     </BrowserRouter>
   );

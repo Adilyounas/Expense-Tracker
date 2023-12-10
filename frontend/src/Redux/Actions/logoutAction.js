@@ -9,7 +9,7 @@ import { getUserDataSucess_true_Reducer } from "../../Redux/Slice/userDetails_Sl
 
 import axios from "axios";
 
-const loginAction = (loginData,navigate) => async (dispatch) => {
+const logout_Action = (navigate) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -17,14 +17,14 @@ const loginAction = (loginData,navigate) => async (dispatch) => {
   };
   try {
     dispatch(generalLoadingTrue());
-    const { data } = await axios.post(`/api/v1/login`, loginData, config);
+    const { data } = await axios.get(`/api/v1/logout`, config);
 
     if (data.success === true) {
       toast.success(data.message);
     }
   
-    dispatch(getUserDataSucess_true_Reducer(true));
-    navigate("/")
+    dispatch(getUserDataSucess_true_Reducer(false));
+    navigate("/login")
 
     dispatch(generalLoadingFalse());
   } catch (error) {
@@ -34,4 +34,4 @@ const loginAction = (loginData,navigate) => async (dispatch) => {
   }
 };
 
-export default loginAction;
+export default logout_Action;

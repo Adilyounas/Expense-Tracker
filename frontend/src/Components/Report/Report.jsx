@@ -13,7 +13,8 @@ import { PieChart, pieArcLabelClasses } from "@mui/x-charts/PieChart";
 import getAllIncomeAndExpenses from "../../Redux/Actions/getAllinComeAndExpense";
 import Loading from "../Loading/Loading";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import toast from "react-hot-toast";
+
+import { resetFilterData_To_ApiFreshData_Reducer } from "../../Redux/Slice/All_IncomeAndExpenseSlice";
 
 const Report = () => {
   let currencySymbol = JSON.parse(localStorage.getItem("currencySymbol"));
@@ -93,145 +94,163 @@ const Report = () => {
       {generalLoading ? (
         <Loading />
       ) : (
-       <>
-        {
-          filtered_IncomeAndExpenseArr && filtered_IncomeAndExpenseArr?(
-            <Box
-          sx={{
-            m: "10vh 0 20vh 0 ",
-          }}
-        >
-          <Container
-            maxWidth="sm"
+        <>
+          <Box
             sx={{
-              flexGrow: 1,
-              border: "1px solid #e1e1e1",
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
-              p: "1vmax",
-              borderRadius: "7px",
-              boxShadow: "0px 10px 10px 0px #e1e1e1",
+              m: "10vh 0 20vh 0 ",
             }}
           >
-            <span className="reportPageTitle">Report Page </span>
-            <FilterAltIcon
-              onClick={filterDrawerOpenCloseHandler}
-              className="ReportPagefilterIcon"
+            <Container
+              maxWidth="sm"
+              sx={{
+                flexGrow: 1,
+                border: "1px solid #e1e1e1",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                p: "1vmax",
+                borderRadius: "7px",
+                boxShadow: "0px 10px 10px 0px #e1e1e1",
+              }}
+            >
+              <span className="reportPageTitle">Report Page </span>
+              <FilterAltIcon
+                onClick={filterDrawerOpenCloseHandler}
+                className="ReportPagefilterIcon"
+              />
+            </Container>
+
+            {expenseDataCustom && expenseDataCustom.length > 0 ? (
+              <div id="expenseReport">
+                <PieChart
+                  series={[
+                    {
+                      arcLabel: (item) => `${currencySymbol}:${expenseSum}`,
+                      arcLabelMinAngle: 45,
+                      data: data,
+                      innerRadius: 120,
+
+                      outerRadius: 170,
+                    },
+                  ]}
+                  sx={{
+                    [`& .${pieArcLabelClasses.root}`]: {
+                      fill: "red",
+                      fontWeight: "bold",
+                    },
+                  }}
+                  height={700}
+                />
+
+                <Box id="expenseAccordian">
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography id="expenseAccordianTitle">
+                        Expense
+                      </Typography>
+                    </AccordionSummary>
+                    {expenseDataCustom &&
+                      expenseDataCustom.length > 0 &&
+                      expenseDataCustom.map((ele, index) => (
+                        <AccordionDetails key={index}>
+                          <Box id="expenseAccordianSummary">
+                            <span>{ele.category}</span>
+                            <span
+                              style={{ color: "red" }}
+                            >{`- ${ele.amount}`}</span>
+                          </Box>
+                        </AccordionDetails>
+                      ))}
+                  </Accordion>
+                </Box>
+              </div>
+            ) : (
+              <Box
+                sx={{
+                  fontSize: "2rem",
+                  textAlign: "center",
+                  padding: "5vmax 0",
+                }}
+              >
+                No Expense Transaction
+              </Box>
+            )}
+
+            {IncomeDataCustom && IncomeDataCustom.length > 0 ? (
+              <div className="incomeReport">
+                <PieChart
+                  series={[
+                    {
+                      arcLabel: (item) => `${currencySymbol}:${incomeSum}`,
+                      arcLabelMinAngle: 45,
+                      data: data2,
+                      innerRadius: 120,
+
+                      outerRadius: 170,
+                    },
+                  ]}
+                  sx={{
+                    [`& .${pieArcLabelClasses.root}`]: {
+                      fill: "green",
+                      fontWeight: "bold",
+                    },
+                  }}
+                  height={700}
+                />
+
+                <Box id="expenseAccordian">
+                  <Accordion>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1a-content"
+                      id="panel1a-header"
+                    >
+                      <Typography id="expenseAccordianTitle">Income</Typography>
+                    </AccordionSummary>
+                    {IncomeDataCustom &&
+                      IncomeDataCustom.length > 0 &&
+                      IncomeDataCustom.map((ele, index) => (
+                        <AccordionDetails key={index}>
+                          <Box id="expenseAccordianSummary">
+                            <span>{ele.category}</span>
+                            <span
+                              style={{ color: "green" }}
+                            >{`+ ${ele.amount}`}</span>
+                          </Box>
+                        </AccordionDetails>
+                      ))}
+                  </Accordion>
+                </Box>
+              </div>
+            ) : (
+              <Box
+                sx={{
+                  fontSize: "2rem",
+                  textAlign: "center",
+                  padding: "5vmax 0",
+                }}
+              >
+                No Income Transaction
+              </Box>
+            )}
+
+            <FilterDrawer
+              filterDrawerOpen={filterDrawerOpen}
+              filterDrawerOpenCloseHandler={filterDrawerOpenCloseHandler}
+              filtered_IncomeAndExpenseArr={filtered_IncomeAndExpenseArr}
+              allTransaction_IncomeAndExpenseArr={
+                allTransaction_IncomeAndExpenseArr
+              }
+              resetFilterData_To_ApiFreshData_Reducer={
+                resetFilterData_To_ApiFreshData_Reducer
+              }
             />
-          </Container>
-
-          {expenseDataCustom && expenseDataCustom.length > 0 ? (
-            <div id="expenseReport">
-              <PieChart
-                series={[
-                  {
-                    arcLabel: (item) => `${currencySymbol}:${expenseSum}`,
-                    arcLabelMinAngle: 45,
-                    data: data,
-                    innerRadius: 120,
-
-                    outerRadius: 170,
-                  },
-                ]}
-                sx={{
-                  [`& .${pieArcLabelClasses.root}`]: {
-                    fill: "red",
-                    fontWeight: "bold",
-                  },
-                }}
-                height={700}
-              />
-
-              <Box id="expenseAccordian">
-                <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography id="expenseAccordianTitle">Expense</Typography>
-                  </AccordionSummary>
-                  {expenseDataCustom &&
-                    expenseDataCustom.length > 0 &&
-                    expenseDataCustom.map((ele, index) => (
-                      <AccordionDetails key={index}>
-                        <Box id="expenseAccordianSummary">
-                          <span>{ele.category}</span>
-                          <span
-                            style={{ color: "red" }}
-                          >{`- ${ele.amount}`}</span>
-                        </Box>
-                      </AccordionDetails>
-                    ))}
-                </Accordion>
-              </Box>
-            </div>
-          ) : (
-            ""
-          )}
-
-          {IncomeDataCustom && IncomeDataCustom.length > 0 ? (
-            <div className="incomeReport">
-              <PieChart
-                series={[
-                  {
-                    arcLabel: (item) => `${currencySymbol}:${incomeSum}`,
-                    arcLabelMinAngle: 45,
-                    data: data2,
-                    innerRadius: 120,
-
-                    outerRadius: 170,
-                  },
-                ]}
-                sx={{
-                  [`& .${pieArcLabelClasses.root}`]: {
-                    fill: "green",
-                    fontWeight: "bold",
-                  },
-                }}
-                height={700}
-              />
-
-              <Box id="expenseAccordian">
-                <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography id="expenseAccordianTitle">Income</Typography>
-                  </AccordionSummary>
-                  {IncomeDataCustom &&
-                    IncomeDataCustom.length > 0 &&
-                    IncomeDataCustom.map((ele, index) => (
-                      <AccordionDetails key={index}>
-                        <Box id="expenseAccordianSummary">
-                          <span>{ele.category}</span>
-                          <span
-                            style={{ color: "green" }}
-                          >{`+ ${ele.amount}`}</span>
-                        </Box>
-                      </AccordionDetails>
-                    ))}
-                </Accordion>
-              </Box>
-            </div>
-          ) : (
-            ""
-          )}
-
-          <FilterDrawer
-            filterDrawerOpen={filterDrawerOpen}
-            filterDrawerOpenCloseHandler={filterDrawerOpenCloseHandler}
-            filtered_IncomeAndExpenseArr={filtered_IncomeAndExpenseArr}
-            allTransaction_IncomeAndExpenseArr={allTransaction_IncomeAndExpenseArr}
-
-          />
-        </Box>
-          ):toast.promise("No Transaction Found")
-        }
-       </>
+          </Box>
+        </>
       )}
     </>
   );

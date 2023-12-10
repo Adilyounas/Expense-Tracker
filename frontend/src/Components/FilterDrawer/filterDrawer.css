@@ -101,6 +101,7 @@
 
 @media screen and (max-width: 620px) {
   #filterDrawer_Major_Container {
-    height: calc(100vh - 60px);
+    /* height: calc(100vh - 60px); */
+    padding-bottom: 80px;
   }
 }

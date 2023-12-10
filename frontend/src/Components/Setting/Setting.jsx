@@ -15,6 +15,10 @@ import sortedCurrency from "../Static Data/Currencies";
 import sortedCategory from "../Static Data/Category";
 import paymentModeArr from "../Static Data/Payment";
 import TimeFormateDialog from "./TimeFormateDialog";
+import ClearAllRecordsDialog from "./ClearAllRecordsDialog";
+
+import { useDispatch } from "react-redux";
+import deleteAllUserData_Action from "../../Redux/Actions/deleteAllUserDataAction";
 
 const Settings = () => {
   //TODO <--------------  GETTING VALUES FORM LOCAL STORAGE   ---------------->
@@ -25,12 +29,29 @@ const Settings = () => {
   // let currencySymbol = JSON.parse(localStorage.getItem("currencySymbol"));
 
   //TODO <------------------  USESTATES  -------------------->
-
+  const dispatch = useDispatch();
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
+
+  const [clearAllRecordDialogOpen, setClearAllRecordDialogOpen] =
+    useState(false);
+
   const [timeFormateDialogOpen, setTimeFormateDialogOpen] = useState(false);
   const [timeFormateVal, setTimeFormateVal] = useState(timeVal);
 
   const [reRender, setReRender] = useState(false);
+
+  //TODO <--------------------  CLEAR ALL RECORD DIALOG OPEN CLOSE HANDLER & CONFIRMED SECTION  --------------------->
+
+  const clearAllRecordDialogOpenHandler = () => {
+    setClearAllRecordDialogOpen(!clearAllRecordDialogOpen);
+  };
+
+  const clearAllRecordConfirmedHandler = () => {
+    console.log("confirmed");
+    setClearAllRecordDialogOpen(!clearAllRecordDialogOpen);
+
+    dispatch(deleteAllUserData_Action());
+  };
 
   //TODO <--------------------  CLEAR YOUR SETTING  --------------------->
 
@@ -45,7 +66,6 @@ const Settings = () => {
     localStorage.removeItem("currencySymbol");
     localStorage.removeItem("timeVal");
     localStorage.removeItem("startDate");
-
 
     //** */ <--------------------  ADD DEFAULT ITEMS TO LOCAL STORAGE  --------------------->
 
@@ -105,6 +125,12 @@ const Settings = () => {
 
   return (
     <>
+      <ClearAllRecordsDialog
+        clearAllRecordDialogOpen={clearAllRecordDialogOpen}
+        clearAllRecordDialogOpenHandler={clearAllRecordDialogOpenHandler}
+        clearAllRecordConfirmedHandler={clearAllRecordConfirmedHandler}
+      />
+
       <ResetSettingDialog
         resetDialogOpen={resetDialogOpen}
         clearSettingHandler={clearSettingHandler}
@@ -131,7 +157,10 @@ const Settings = () => {
           </Box>
 
           <Box component={"div"} id="setting_body">
-            <div className="clearAllRecords two_spans">
+            <div
+              className="clearAllRecords two_spans"
+              onClick={clearAllRecordDialogOpenHandler}
+            >
               <span>
                 <h3>Clear All Records</h3>
                 <p>This will clear your all income, expense entries</p>
@@ -147,8 +176,8 @@ const Settings = () => {
               <span>
                 <h3>Rest To Default Settings</h3>
                 <p>
-                  This will Reset, Added Set-Budget, Start-Date, Payment-Mode, Categories,
-                  Time-Formate
+                  This will Reset, Added Set-Budget, Start-Date, Payment-Mode,
+                  Categories, Time-Formate
                 </p>
               </span>
               <span>

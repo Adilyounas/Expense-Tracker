@@ -171,7 +171,7 @@ const AddIncome = () => {
             </Box>
 
             <Button type="submit" variant="contained">
-              Add Income
+              Add Expense
             </Button>
           </form>
         </Box>
