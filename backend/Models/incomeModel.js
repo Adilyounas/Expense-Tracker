@@ -30,6 +30,10 @@ const incomeSchema = new mongoose.Schema({
     type: Date,
     required: [true, 'Please provide the income date and Time'],
   },
+  priority:{
+    type: Number,
+    required: [true, 'Please provide the Priority'],
+  }
 });
 
 const Income = new mongoose.model('Income', incomeSchema);

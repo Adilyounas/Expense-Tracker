@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import axios from "axios";
 
 import {
@@ -6,8 +5,7 @@ import {
   generalLoadingFalse,
 } from "../Slice/generalLoading";
 
-import {getSingleTransactionReducer} from "../Slice/singleTransaction"
-
+import { getSingleTransactionReducer } from "../Slice/singleTransaction";
 
 const singleTransactionAction = (id) => async (dispatch) => {
   const config = {
@@ -25,7 +23,7 @@ const singleTransactionAction = (id) => async (dispatch) => {
     //TODO <--------------- GETTING ALL INCOME SENDING DATA TO REDUCER  ---------------->
 
     const { data } = await axios.get(`/api/v1/allTransitions/${id}`, config);
-    
+
     dispatch(getSingleTransactionReducer(data.transaction));
 
     //** */ <--------------- LOADING FALSE  ---------------->
@@ -33,7 +31,7 @@ const singleTransactionAction = (id) => async (dispatch) => {
     dispatch(generalLoadingFalse());
   } catch (error) {
     dispatch(generalLoadingFalse());
-    toast.error(error.response.data.message);
+    // toast.error(error.response.data.message);
     console.log(error.response.data.message);
   }
 };

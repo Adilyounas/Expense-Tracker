@@ -29,15 +29,14 @@ import { useDispatch, useSelector } from "react-redux";
 import singleTransactionAction from "../../Redux/Actions/singleTransaction";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { deleteTransactionReducer } from "../../Redux/Slice/deleteTransaction";
 import DeleteTransaction from "./DeleteTransaction";
 
 //TODO <------------  COMPONENT START FORM HERE  ---------------------->
 
 const EditTransaction = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { id } = useParams();
   //TODO <------------  GETTING DATA FROM LOCAL STORAGE ON EVERY CALL  ---------------------->
   const category = JSON.parse(localStorage.getItem("category"));
   const paymentMode = JSON.parse(localStorage.getItem("paymentMode"));
@@ -50,9 +49,7 @@ const EditTransaction = () => {
     (state) => state.SingleTransaction
   );
 
-  const { deleteTransactionSuccess } = useSelector(
-    (state) => state.DeleteSingleTransactionSlice
-  );
+
 
   //TODO <------------  USESTATE HOOKS  ---------------------->
 
@@ -66,7 +63,8 @@ const EditTransaction = () => {
   };
 
   const deleteTransactionConfirmedHandler = () => {
-    dispatch(deleteTransactionAction(id));
+    dispatch(deleteTransactionAction(id, navigate));
+    setDeleteTransactionDialogOpen(!deleteTransactionDialogOpen);
   };
 
   let [incomeData, setIncomeData] = useState({
@@ -109,23 +107,18 @@ const EditTransaction = () => {
 
   const IncomeSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(updateTransaction(incomeData, id));
+    dispatch(updateTransaction(incomeData, id, navigate));
   };
 
   useEffect(() => {
     dispatch(singleTransactionAction(id));
-
-    if (deleteTransactionSuccess === true) {
-      navigate(-1);
-      dispatch(deleteTransactionReducer(false));
-    }
-  }, [dispatch, id, deleteTransactionSuccess, navigate]);
+  }, [dispatch, id]);
 
   return (
     <>
       {generalLoading ? (
         <Loading />
-      ) : singleTransactionData ? (
+      ) : singleTransactionData && singleTransactionData ? (
         <Box component={"div"} id="addIncome_Major_Container">
           <form className="income_Container" onSubmit={IncomeSubmitHandler}>
             <Box

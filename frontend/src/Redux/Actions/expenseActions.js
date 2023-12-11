@@ -16,7 +16,7 @@ const addExpenseAction = (expenseData) => async (dispatch) => {
 
   try {
     dispatch(generalLoadingTrue());
-    const { data } = await axios.post(`/api/v1/addExpense`, expenseData, config);
+    const { data } = await axios.post(`/api/v1/createTransaction`, expenseData, config);
     if (data.success === true) {
       toast.success(data.message);
     }
@@ -24,7 +24,7 @@ const addExpenseAction = (expenseData) => async (dispatch) => {
     dispatch(generalLoadingFalse());
   } catch (error) {
     dispatch(generalLoadingFalse());
-    toast.error(error.response.data.message);
+    // toast.error(error.response.data.message);
     console.log(error.response.data.message);
   }
 };

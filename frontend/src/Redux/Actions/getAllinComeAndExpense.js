@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import axios from "axios";
 
 import {
@@ -25,7 +24,7 @@ const getAllIncomeAndExpenses = () => async (dispatch) => {
 
     //TODO <--------------- GETTING ALL INCOME SENDING DATA TO REDUCER  ---------------->
 
-    const { data } = await axios.get(`/api/v1/getAll_IncomeAndExpense`, config);
+    const { data } = await axios.get(`/api/v1/getAllTransactions`, config);
     // dispatch(allTransactionHeading_Reducer(data.containerForHeading));
     dispatch(AllTransaction_IncomeAndExpense_Reducer(data.monthArray));
 
@@ -36,7 +35,7 @@ const getAllIncomeAndExpenses = () => async (dispatch) => {
     dispatch(generalLoadingFalse());
   } catch (error) {
     dispatch(generalLoadingFalse());
-    toast.error(error.response.data.message);
+    // toast.error(error.response.data.message);
     console.log(error.response.data.message);
   }
 };

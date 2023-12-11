@@ -2,9 +2,7 @@ const express = require("express");
 const app = express();
 const cookieParser = require('cookie-parser');
 const userRoutes = require("./Routes/userRoutes")
-const incomeRoutes = require("./Routes/incomeRoutes")
-const expenseRoutes = require("./Routes/expenseRoutes")
-const getAll_IncomeAndExpense_Routes = require("./Routes/getAll_IncomeAndExpense_Routes")
+const transactionRouter = require("./Routes/transactionRoutes")
 
 
 
@@ -17,9 +15,8 @@ app.use(cookieParser())
 
 // import routes
 app.use("/api/v1",userRoutes)
-app.use("/api/v1",incomeRoutes)
-app.use("/api/v1",expenseRoutes)
-app.use("/api/v1",getAll_IncomeAndExpense_Routes)
+app.use("/api/v1",transactionRouter)
+
 
 
 

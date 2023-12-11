@@ -81,7 +81,7 @@ const Dashboard = () => {
 
   const calculateIncomeExpenseSums = (data) => {
     data.forEach((month) => {
-      month.data.forEach((transaction) => {
+      month.transactions.forEach((transaction) => {
         const date = new Date(transaction.dateAndTime).getDate();
         const transactionMonth =
           new Date(transaction.dateAndTime).getMonth() + 1;
@@ -108,7 +108,7 @@ const Dashboard = () => {
 
   const calculateOverAllIncomeAndExpense = (data) => {
     data.forEach((month) => {
-      month.data.forEach((transaction) => {
+      month.transactions.forEach((transaction) => {
         if (transaction.type === "Income") {
           overAllSum = overAllSum + transaction.amount;
         } else if (transaction.type === "Expense") {

@@ -12,14 +12,11 @@ export const All_IncomeAndExpense = createSlice({
   reducers: {
     AllTransaction_IncomeAndExpense_Reducer: (state, actions) => {
       state.allTransaction_IncomeAndExpenseArr = actions.payload;
-      let exptractedData = [];
-      actions.payload.forEach((month) => {
-        month.data.forEach((transaction) => {
-          exptractedData.push(transaction);
-        });
-      });
-      state.filtered_IncomeAndExpenseArr = exptractedData;
-      state.stateForResetValues = exptractedData;
+
+      state.filtered_IncomeAndExpenseArr = actions.payload;
+     
+      state.stateForResetValues = actions.payload;
+      // state.stateForResetValues = exptractedData;
 
     },
 

@@ -1,7 +1,6 @@
 //todo  <---------------------------- Sensitive   -------------------------->
 
 //todo  <---------------------------------------------------->
-let filteredData = [];
 
 //todo  <------------------------  QUICK ACCESS RADIOS   ---------------------------->
 
@@ -21,152 +20,135 @@ const activeRadioSelectionHandler = (
 
   switch (value) {
     case "all":
-      filteredData = [];
-
-      filtered_IncomeAndExpenseArr.forEach((transaction) => {
-        // setFilteredData((old) => [...old, ele]);
-        filteredData.push(transaction);
-      });
-
-      dispatch(modifiedData(filteredData));
-
       break;
 
     case "yesterday":
-      filteredData = [];
+      const yesterdayData = filtered_IncomeAndExpenseArr.map((month) => ({
+        ...month,
+        transactions: month.transactions.filter((transaction) => {
+          const transactionDate = new Date(transaction.dateAndTime);
+          const currentDate = new Date();
 
-      filtered_IncomeAndExpenseArr.forEach((transaction) => {
-        const transactionDate = new Date(transaction.dateAndTime);
-        const currentDate = new Date();
-        if (
-          currentDate.getFullYear() === transactionDate.getFullYear() &&
-          currentDate.getMonth() === transactionDate.getMonth() &&
-          currentDate.getDate() - 1 === transactionDate.getDate()
-        ) {
-          //   setFilteredData((old) => [...old, transaction]);
-          filteredData.push(transaction);
-        }
-      });
+          return (
+            currentDate.getFullYear() === transactionDate.getFullYear() &&
+            currentDate.getMonth() === transactionDate.getMonth() &&
+            currentDate.getDate() - 1 === transactionDate.getDate()
+          );
+        }),
+      }));
 
-      dispatch(modifiedData(filteredData));
+      dispatch(modifiedData(yesterdayData));
 
       break;
 
     case "thisMonth":
-      filteredData = [];
+      const thisMonthData = filtered_IncomeAndExpenseArr.map((month) => ({
+        ...month,
+        transactions: month.transactions.filter((transaction) => {
+          const transactionDate = new Date(transaction.dateAndTime);
+          const currentDate = new Date();
 
-      filtered_IncomeAndExpenseArr.forEach((transaction) => {
-        const transactionDate = new Date(transaction.dateAndTime);
-        const currentDate = new Date();
-        if (
-          currentDate.getFullYear() === transactionDate.getFullYear() &&
-          currentDate.getMonth() === transactionDate.getMonth() &&
-          currentDate.getMonth() === transactionDate.getMonth()
-        ) {
-          //   setFilteredData((old) => [...old, transaction]);
-          filteredData.push(transaction);
-        }
-      });
+          return (
+            currentDate.getFullYear() === transactionDate.getFullYear() &&
+            currentDate.getMonth() === transactionDate.getMonth() &&
+            currentDate.getMonth() === transactionDate.getMonth()
+          );
+        }),
+      }));
 
-      dispatch(modifiedData(filteredData));
+      dispatch(modifiedData(thisMonthData));
 
       break;
 
     case "today":
-      filteredData = [];
+      const today = filtered_IncomeAndExpenseArr.map((month) => ({
+        ...month,
+        transactions: month.transactions.filter((transaction) => {
+          const transactionDate = new Date(transaction.dateAndTime);
+          const currentDate = new Date();
 
-      filtered_IncomeAndExpenseArr.forEach((transaction) => {
-        const transactionDate = new Date(transaction.dateAndTime);
-        const currentDate = new Date();
-        if (
-          currentDate.getFullYear() === transactionDate.getFullYear() &&
-          currentDate.getMonth() === transactionDate.getMonth() &&
-          currentDate.getDay() === transactionDate.getDay()
-        ) {
-          //   setFilteredData((old) => [...old, transaction]);
-          filteredData.push(transaction);
-        }
-      });
+          return (
+            currentDate.getFullYear() === transactionDate.getFullYear() &&
+            currentDate.getMonth() === transactionDate.getMonth() &&
+            currentDate.getDay() === transactionDate.getDay()
+          );
+        }),
+      }));
 
-      dispatch(modifiedData(filteredData));
+      dispatch(modifiedData(today));
 
       break;
 
     case "lastWeek":
-      filteredData = [];
+      const lastWeek = filtered_IncomeAndExpenseArr.map((month) => ({
+        ...month,
+        transactions: month.transactions.filter((transaction) => {
+          const transactionDate = new Date(transaction.dateAndTime);
+          const current = new Date();
+          const currentDay = current.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
 
-      filtered_IncomeAndExpenseArr.forEach((transaction) => {
-        const transactionDate = new Date(transaction.dateAndTime);
-        const current = new Date();
-        const currentDay = current.getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+          //Reach currunt monday of the week
+          const daysToMonday = currentDay === 0 ? 1 : currentDay - 1;
 
-        //Reach currunt monday of the week
-        const daysToMonday = currentDay === 0 ? 1 : currentDay - 1;
+          const mondayDate = new Date();
+          mondayDate.setDate(current.getDate() - daysToMonday);
 
-        const mondayDate = new Date();
-        mondayDate.setDate(current.getDate() - daysToMonday);
+          // Calculate the date of the Sunday (end of the week) of the current week
+          const sundayDate = new Date();
+          sundayDate.setDate(mondayDate.getDate() + 6);
 
-        // Calculate the date of the Sunday (end of the week) of the current week
-        const sundayDate = new Date();
-        sundayDate.setDate(mondayDate.getDate() + 6);
+          //todo <-----------------------------------  creating last week data ---------------------------------->
 
-        //todo <-----------------------------------  creating last week data ---------------------------------->
+          const lastWeekMonday = new Date(mondayDate);
+          lastWeekMonday.setDate(mondayDate.getDate() - 7);
 
-        const lastWeekMonday = new Date(mondayDate);
-        lastWeekMonday.setDate(mondayDate.getDate() - 7);
+          const lastWeekSunday = new Date(sundayDate);
+          lastWeekSunday.setDate(sundayDate.getDate() - 7);
 
-        const lastWeekSunday = new Date(sundayDate);
-        lastWeekSunday.setDate(sundayDate.getDate() - 7);
+          return (
+            transactionDate >= lastWeekMonday &&
+            transactionDate <= lastWeekSunday
+          );
+        }),
+      }));
 
-        if (
-          transactionDate >= lastWeekMonday &&
-          transactionDate <= lastWeekSunday
-        ) {
-          //   setFilteredData((old) => [...old, transaction]);
-          filteredData.push(transaction);
-        }
-      });
-
-      dispatch(modifiedData(filteredData));
+      dispatch(modifiedData(lastWeek));
 
       break;
 
     case "lastMonth":
-      filteredData = [];
+      const lastMonth = filtered_IncomeAndExpenseArr.map((month) => ({
+        ...month,
+        transactions: month.transactions.filter((transaction) => {
+          const transactionDate = new Date(transaction.dateAndTime);
+          const current = new Date();
+          const currentMonth = current.getMonth(); // 0 for January, 1 for February, ..., 11 for December
 
-      filtered_IncomeAndExpenseArr.forEach((transaction) => {
-        const transactionDate = new Date(transaction.dateAndTime);
-        const current = new Date();
-        const currentMonth = current.getMonth(); // 0 for January, 1 for February, ..., 11 for December
+          // Calculate the first day of the current month
+          const firstDayOfCurrentMonth = new Date(
+            current.getFullYear(),
+            currentMonth,
+            1
+          );
 
-        // Calculate the first day of the current month
-        const firstDayOfCurrentMonth = new Date(
-          current.getFullYear(),
-          currentMonth,
-          1
-        );
+          // Calculate the last day of the last month
+          const lastDayOfLastMonth = new Date(firstDayOfCurrentMonth);
+          lastDayOfLastMonth.setDate(firstDayOfCurrentMonth.getDate() - 1); //firstDay of currunt month - 1 = lastday of last month
 
-        // Calculate the last day of the last month
-        const lastDayOfLastMonth = new Date(firstDayOfCurrentMonth);
-        lastDayOfLastMonth.setDate(firstDayOfCurrentMonth.getDate() - 1); //firstDay of currunt month - 1 = lastday of last month
+          const firstDayOfLastMonth = new Date(
+            current.getFullYear(),
+            currentMonth - 1,
+            1
+          );
 
-        const firstDayOfLastMonth = new Date(
-          current.getFullYear(),
-          currentMonth - 1,
-          1
-        );
+          return (
+            transactionDate >= firstDayOfLastMonth &&
+            transactionDate <= lastDayOfLastMonth
+          );
+        }),
+      }));
 
-        // Check if the transaction occurred within the last month
-        if (
-          transactionDate >= firstDayOfLastMonth &&
-          transactionDate <= lastDayOfLastMonth
-        ) {
-          //   setFilteredData((old) => [...old, transaction]);
-          filteredData.push(transaction);
-        }
-      });
-
-      dispatch(modifiedData(filteredData));
+      dispatch(modifiedData(lastMonth));
 
       break;
 
@@ -192,40 +174,28 @@ export const incomeAndExpensOnChangeHandler = (
 
   switch (value) {
     case "all":
-      filteredData = [];
-      filtered_IncomeAndExpenseArr.forEach((transaction) => {
-        // setFilteredData((old) => [...old, ele]);
-        filteredData.push(transaction);
-      });
-
-      dispatch(modifiedData(filteredData));
-
       break;
     case "income":
-      filteredData = [];
+      const incomeData = filtered_IncomeAndExpenseArr.map((month) => ({
+        ...month,
+        transactions: month.transactions.filter((transaction) => {
+          return transaction.type === "Income";
+        }),
+      }));
 
-      filtered_IncomeAndExpenseArr.forEach((transaction) => {
-        // setFilteredData((old) => [...old, ele]);
-        if (transaction.type === "Income") {
-          filteredData.push(transaction);
-        }
-      });
-
-      dispatch(modifiedData(filteredData));
+      dispatch(modifiedData(incomeData));
 
       break;
 
     case "expense":
-      filteredData = [];
+      const expenseData = filtered_IncomeAndExpenseArr.map((month) => ({
+        ...month,
+        transactions: month.transactions.filter((transaction) => {
+          return transaction.type === "Expense";
+        }),
+      }));
 
-      filtered_IncomeAndExpenseArr.forEach((transaction) => {
-        // setFilteredData((old) => [...old, ele]);
-        if (transaction.type === "Expense") {
-          filteredData.push(transaction);
-        }
-      });
-
-      dispatch(modifiedData(filteredData));
+      dispatch(modifiedData(expenseData));
 
       break;
 
@@ -245,15 +215,16 @@ export const categoryRadioOnchangeHandler = (
 ) => {
   const { value } = event.target;
   if (value) {
-    filteredData = [];
     setCategorySectionRadio(value);
-    filtered_IncomeAndExpenseArr.forEach((transaction) => {
-      if (transaction.category === value) {
-        filteredData.push(transaction);
-      }
-    });
 
-    dispatch(modifiedData(filteredData));
+    const matchedCategory = filtered_IncomeAndExpenseArr.map((month) => ({
+      ...month,
+      transactions: month.transactions.filter((transaction) => {
+        return transaction.category === value;
+      }),
+    }));
+
+    dispatch(modifiedData(matchedCategory));
   }
 };
 
@@ -269,15 +240,16 @@ export const paymentModeRadioOnchangeHandler = (
 ) => {
   const { value } = event.target;
   if (value) {
-    filteredData = [];
     setPaymentModeSectionRadio(value);
-    filtered_IncomeAndExpenseArr.forEach((transaction) => {
-      if (transaction.paymentMode === value) {
-        filteredData.push(transaction);
-      }
-    });
 
-    dispatch(modifiedData(filteredData));
+    const matchedPaymentMode = filtered_IncomeAndExpenseArr.map((month) => ({
+      ...month,
+      transactions: month.transactions.filter((transaction) => {
+        return transaction.paymentMode === value;
+      }),
+    }));
+
+    dispatch(modifiedData(matchedPaymentMode));
   }
 };
 
@@ -285,13 +257,13 @@ export const paymentModeRadioOnchangeHandler = (
 
 export const resetValuesHandler = (
   dispatch,
-setActiveRadioValue,
-setDateAndTimeValueFrom,
-setDateAndTimeValueTo,
-setIncomeAndExpenseRadio,
-setCategorySectionRadio,
-setPaymentModeSectionRadio,
-resetFilterData_To_ApiFreshData_Reducer
+  setActiveRadioValue,
+  setDateAndTimeValueFrom,
+  setDateAndTimeValueTo,
+  setIncomeAndExpenseRadio,
+  setCategorySectionRadio,
+  setPaymentModeSectionRadio,
+  resetFilterData_To_ApiFreshData_Reducer
 ) => {
   setActiveRadioValue("all");
   setDateAndTimeValueFrom(new Date());
@@ -299,7 +271,7 @@ resetFilterData_To_ApiFreshData_Reducer
   setIncomeAndExpenseRadio("all");
   setCategorySectionRadio("all");
   setPaymentModeSectionRadio("all");
-  dispatch(resetFilterData_To_ApiFreshData_Reducer())
+  dispatch(resetFilterData_To_ApiFreshData_Reducer());
 };
 
 //TODO <-------------------------------------------------------------------------->
@@ -325,20 +297,19 @@ export function checkAndModified(
   ) {
     return;
   } else {
-    let dateFilterData = [];
-    allTransaction_IncomeAndExpenseArr.forEach((month) => {
-      month.data.forEach((transaction) => {
+    const matchFrom_TO = filtered_IncomeAndExpenseArr.map((month) => ({
+      ...month,
+      transactions: month.transactions.filter((transaction) => {
         const transactionDate = new Date(transaction.dateAndTime);
-        if (
+
+        return (
           transactionDate >= dateAndTimeValueFrom &&
           transactionDate <= dateAndTimeValueTo
-        ) {
-          dateFilterData.push(transaction);
-        }
-      });
-    });
+        );
+      }),
+    }));
 
-    dispatch(modifiedData(dateFilterData));
+    dispatch(modifiedData(matchFrom_TO));
   }
 }
 

@@ -6,7 +6,7 @@ import {
 
 import axios from "axios";
 
-const updateTransaction = (updatedData,id) => async (dispatch) => {
+const updateTransaction = (updatedData,id,navigate) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -17,6 +17,8 @@ const updateTransaction = (updatedData,id) => async (dispatch) => {
   try {
     dispatch(generalLoadingTrue());
     const { data } = await axios.put(`/api/v1/allTransitions/updateTransaction/${id}`, updatedData, config);
+
+    navigate("/allTransitions")
     if (data.success === true) {
       toast.success(data.message);
     }
@@ -25,7 +27,7 @@ const updateTransaction = (updatedData,id) => async (dispatch) => {
     dispatch(generalLoadingFalse());
   } catch (error) {
     dispatch(generalLoadingFalse());
-    toast.error(error.response.data.message);
+    // toast.error(error.response.data.message);
     console.log(error.response.data.message);
   }
 };

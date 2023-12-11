@@ -1,4 +1,3 @@
-import toast from "react-hot-toast";
 import axios from "axios";
 
 import {
@@ -33,10 +32,10 @@ const getUserDetails_Action = () => async (dispatch) => {
     dispatch(generalLoadingFalse());
   } catch (error) {
     dispatch(generalLoadingFalse());
-    setTimeout(() => {
-      toast.error(error.response.data.message);
+    // setTimeout(() => {
+    //   toast.error(error.response.data.message);
       
-    }, 3000);
+    // }, 3000);
     console.log(error.response.data.message);
   }
 };

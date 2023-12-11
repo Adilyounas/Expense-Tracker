@@ -30,6 +30,10 @@ const expenseSchema = new mongoose.Schema({
     type: Date,
     required: [true, 'Please provide the Expense date and Time'],
   },
+  priority:{
+    type: Number,
+    required: [true, 'Please provide the Priority'],
+  }
 });
 
 const Expense = new mongoose.model('Expense', expenseSchema);

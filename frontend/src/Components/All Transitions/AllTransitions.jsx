@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import FilterDrawer from "../FilterDrawer/FilterDrawer";
 import { Box } from "@mui/material";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
@@ -16,6 +16,20 @@ import getAllIncomeAndExpenses from "../../Redux/Actions/getAllinComeAndExpense"
 import { usePDF } from "react-to-pdf";
 
 const AllTransitions = () => {
+  const monthsArray = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   const { toPDF, targetRef } = usePDF({ filename: "page.pdf" });
 
   // const currencyVal = JSON.parse(localStorage.getItem("currencyVal"))
@@ -31,6 +45,7 @@ const AllTransitions = () => {
   const { generalLoading } = useSelector((state) => state.generalLoading);
   const { allTransaction_IncomeAndExpenseArr, filtered_IncomeAndExpenseArr } =
     useSelector((state) => state.All_IncomeAndExpenseSlice);
+
 
   useEffect(() => {
     dispatch(getAllIncomeAndExpenses());
@@ -64,57 +79,61 @@ const AllTransitions = () => {
 
               {/* ele.enteryMonth=== new Date(transaction.dateAndTime).getMonth()   */}
 
-              {allTransaction_IncomeAndExpenseArr &&
-              allTransaction_IncomeAndExpenseArr.length > 0 ? (
-                allTransaction_IncomeAndExpenseArr.map((ele, index) => (
-                  <Box className="alltransactions-body" key={ele.month}>
-                    <h3>{ele.month}</h3>
-
-                    {filtered_IncomeAndExpenseArr &&
-                      filtered_IncomeAndExpenseArr
-                        .filter(
+              {/* .filter(
                           (transaction) =>
                             ele.enteryMonth ===
                               new Date(transaction.dateAndTime).getMonth() &&
                             ele.enteryYear ===
                               new Date(transaction.dateAndTime).getFullYear()
-                        )
-                        .map((result) => (
-                          <NavLink
-                            key={result._id}
-                            to={`/allTransitions/${result._id}`}
-                          >
-                            <span>
-                              <span className="transaction_date-Icon">
-                                <p>{result.day}</p>
-                              </span>
-                              <Box
-                                component={"span"}
-                                className="transaction-Details"
-                              >
-                                <Box
-                                  color={
-                                    result.type === "Income" ? "green" : "red"
-                                  }
-                                  className="p1-price"
-                                >
-                                  {`${currencySymbol}:`}{" "}
-                                  {result.type === "Income" ? "+" : "-"}
-                                  {result.amount}
-                                </Box>
-                                <Box
-                                  color={
-                                    result.type === "Income" ? "green" : "red"
-                                  }
-                                  className="p2-des"
-                                >
-                                  {result.category}
-                                </Box>
-                              </Box>
+                        ) */}
+
+              {filtered_IncomeAndExpenseArr &&
+              filtered_IncomeAndExpenseArr.length > 0 ? (
+                filtered_IncomeAndExpenseArr.map((month, index) => (
+                  <Box className="alltransactions-body" key={month.month}>
+                    <Box component={"h3"} display={month.transactions.length>0?"block":"none"} >{`${monthsArray[month.month]} ${month.year}` }</Box>
+
+                    {month.transactions
+                      .slice()
+                      .sort(
+                        (a, b) => b.transactionPriority - a.transactionPriority
+                      )
+                      .map((result) => (
+                        <NavLink
+                          key={result._id}
+                          to={`/allTransitions/${result._id}`}
+                        >
+                          <span>
+                            <span className="transaction_date-Icon">
+                              <p>{new Date(result.dateAndTime).getDate()}</p>
                             </span>
-                            <ChevronRightIcon />
-                          </NavLink>
-                        ))}
+                            <Box
+                              component={"span"}
+                              className="transaction-Details"
+                            >
+                              <Box
+                                color={
+                                  result.type === "Income" ? "green" : "red"
+                                }
+                                className="p1-price"
+                              >
+                                {`${currencySymbol}:`}{" "}
+                                {result.type === "Income" ? "+" : "-"}
+                                {result.amount}
+                              </Box>
+                              <Box
+                                color={
+                                  result.type === "Income" ? "green" : "red"
+                                }
+                                className="p2-des"
+                              >
+                                {result.category}
+                              </Box>
+                            </Box>
+                          </span>
+                          <ChevronRightIcon />
+                        </NavLink>
+                      ))}
                   </Box>
                 ))
               ) : (

@@ -32,8 +32,8 @@ const Report = () => {
   let expenseDataCustom = [];
   let IncomeDataCustom = [];
 
-  if (filtered_IncomeAndExpenseArr) {
-    filtered_IncomeAndExpenseArr.forEach((transaction) => {
+  const calculatingValues = (month) => {
+    month.transactions.forEach((transaction) => {
       if (transaction.type === "Expense") {
         const existingCategory = expenseDataCustom.find(
           (item) => item.category === transaction.category
@@ -63,6 +63,12 @@ const Report = () => {
           });
         }
       }
+    });
+  };
+
+  if (filtered_IncomeAndExpenseArr) {
+    filtered_IncomeAndExpenseArr.forEach((month) => {
+      calculatingValues(month);
     });
   }
 

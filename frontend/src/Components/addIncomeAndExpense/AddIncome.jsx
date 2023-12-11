@@ -54,6 +54,7 @@ const AddIncome = () => {
     dateAndTime: dateAndTimeValue,
     paymentMode: paymentMode[0].value,
     note: "",
+    type:"Income"
   });
 
   const timeAndDataChangeHandler = (e) => {
