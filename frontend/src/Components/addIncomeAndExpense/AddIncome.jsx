@@ -75,7 +75,6 @@ const AddIncome = () => {
 
   const IncomeSubmitHandler = (e) => {
     e.preventDefault();
-    // console.log(incomeData);
     dispatch(addIncomeAction(incomeData));
   };
   return (

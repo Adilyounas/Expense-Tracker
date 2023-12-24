@@ -9,6 +9,42 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import DonutSmallIcon from "@mui/icons-material/DonutSmall";
+import AutoStoriesIcon from "@mui/icons-material/AutoStories";
+
+
+
+const modules = [
+  {
+    id: 1,
+    link: "/addIncome",
+    icon: <AttachMoneyIcon />,
+    label: "Add Income",
+  },
+  {
+    id: 2,
+    link: "/addExpense",
+    icon: <PointOfSaleIcon />,
+    label: "Add Expense",
+  },
+  {
+    id: 3,
+    link: "/allTransitions",
+    icon: <ReceiptLongIcon />,
+    label: "All Transitions",
+  },
+  {
+    id: 4,
+    link: "/reports",
+    icon: <DonutSmallIcon />,
+    label: "Report",
+  },
+  {
+    id: 4,
+    link: "/khata",
+    icon: <AutoStoriesIcon />,
+    label: "Khata",
+  },
+];
 
 const DashboardCenter = (props) => {
   const budget = JSON.parse(localStorage.getItem("budget"));
@@ -153,25 +189,12 @@ const DashboardCenter = (props) => {
           </Box>
         </div>
         <div id="actionAndDetails_box">
-          <NavLink to={"/addIncome"}>
-            <AttachMoneyIcon />
-            <Box component={"h2"}>Add Income</Box>
-          </NavLink>
-
-          <NavLink to={"/addExpense"}>
-            <PointOfSaleIcon />
-            <Box component={"h2"}>Add Expense</Box>
-          </NavLink>
-
-          <NavLink to={"allTransitions"}>
-            <ReceiptLongIcon />
-            <Box component={"h2"}>All Transitions</Box>
-          </NavLink>
-
-          <NavLink to={"/reports"}>
-            <DonutSmallIcon />
-            <Box component={"h2"}>Report</Box>
-          </NavLink>
+          {modules.map((ele) => (
+            <NavLink key={ele.id} to={ele.link}>
+              {ele.icon}
+              <Box component={"h2"}>{ele.label}</Box>
+            </NavLink>
+          ))}
         </div>
       </Box>
     </>

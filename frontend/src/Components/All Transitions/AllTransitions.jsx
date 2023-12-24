@@ -90,7 +90,7 @@ const AllTransitions = () => {
               {filtered_IncomeAndExpenseArr &&
               filtered_IncomeAndExpenseArr.length > 0 ? (
                 filtered_IncomeAndExpenseArr.map((month, index) => (
-                  <Box className="alltransactions-body" key={month.month}>
+                  <Box className="alltransactions-body" key={month._id}>
                     <Box component={"h3"} display={month.transactions.length>0?"block":"none"} >{`${monthsArray[month.month]} ${month.year}` }</Box>
 
                     {month.transactions

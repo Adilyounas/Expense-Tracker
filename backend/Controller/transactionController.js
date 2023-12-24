@@ -1,4 +1,6 @@
 const TransactionsModel = require("../Models/transactions");
+
+
 const createOrUpdateTransaction = async (req, res) => {
   try {
     const transaction = {
@@ -22,7 +24,7 @@ const createOrUpdateTransaction = async (req, res) => {
 
     if (existingDoc) {
       existingDoc.transactions.push(transaction);
-      await existingDoc.save();
+      await existingDoc.save({validateBeforeSave:false});
 
       await TransactionsModel.findOneAndUpdate(
         {
