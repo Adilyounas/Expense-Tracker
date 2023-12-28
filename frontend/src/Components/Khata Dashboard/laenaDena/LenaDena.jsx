@@ -4,6 +4,8 @@ import DownloadingIcon from "@mui/icons-material/Downloading";
 import { green, red } from "@mui/material/colors";
 
 const LenaDena = (props) => {
+const currencySymbol = JSON.parse(localStorage.getItem("currencySymbol"))
+
   const { lenaTotal, denaTotal } = props;
 
   const denaHanDifference = denaTotal - lenaTotal;
@@ -35,7 +37,7 @@ const LenaDena = (props) => {
             sx={{ color: green[700], fontWeight: "bold" }}
             variant="subtitle1"
           >
-            Rs:{value1}
+            {currencySymbol}:{value1}
           </Typography>
           <Typography
             sx={{ color: green[700], fontWeight: "bold" }}
@@ -65,7 +67,7 @@ const LenaDena = (props) => {
             sx={{ color: red[700], fontWeight: "bold" }}
             variant="subtitle1"
           >
-            Rs:{value2 }
+            {currencySymbol}:{value2 }
           </Typography>
           <Typography
             sx={{ color: red[700], fontWeight: "bold" }}

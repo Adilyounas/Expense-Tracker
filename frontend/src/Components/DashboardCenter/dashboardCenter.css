@@ -182,8 +182,8 @@ p {
   min-width: 150px;
   min-height: 150px;
   /* margin: 10px; */
-  width: 26vmin;
-  height: 26vmin;
+  width: 30vmin;
+  height: 30vmin;
   font-family: "Mina", sans-serif;
   border: 5px solid white;
   border-radius: 10px;

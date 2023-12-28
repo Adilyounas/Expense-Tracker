@@ -340,6 +340,115 @@ const addTransactionInKhtata = async (req, res) => {
   }
 };
 
+
+//todo <------------------- wasoli & wasoli Date ------------------>
+
+
+const setWasoliController = async (req, res) => {
+  try {
+    const { khataId } = req.params;
+    const { wasoliBooleanVal, selectedDate} = req.body;
+
+
+    if (!khataId) {
+      return res.status(500).json({
+        success: false,
+        message: `Id:${khataId} not Found`,
+      });
+    }
+
+    if (!wasoliBooleanVal || !selectedDate) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid or missing values in the request body",
+      });
+    }
+
+    const singleKhata = await UserKhata.findOne({ _id: khataId });
+
+    if (!singleKhata) {
+      return res.status(500).json({
+        success: false,
+        message: "Khata Not Found",
+      });
+    }
+
+    singleKhata.wasoli = wasoliBooleanVal
+    singleKhata.wasoliDate = selectedDate
+
+
+    
+    await singleKhata.save();
+
+    res.status(201).json({
+      success: true,
+      message: `Wasoli Date Setted ✔`,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+
+const setWasoliUndefinedController = async (req, res) => {
+  try {
+    const { khataId } = req.params;
+    const { wasoliBooleanVal, selectedDate} = req.body;
+
+
+    if (!khataId) {
+      return res.status(500).json({
+        success: false,
+        message: `Id:${khataId} not Found`,
+      });
+    }
+
+    if (wasoliBooleanVal !==undefined  || selectedDate !==undefined) {
+      return res.status(400).json({
+        success: false,
+        message: "Data you send is not undefined",
+      });
+    }
+
+    const singleKhata = await UserKhata.findOne({ _id: khataId });
+
+    if (!singleKhata) {
+      return res.status(500).json({
+        success: false,
+        message: "Khata Not Found",
+      });
+    }
+
+    singleKhata.wasoli = wasoliBooleanVal
+    singleKhata.wasoliDate = selectedDate
+
+
+    
+    await singleKhata.save();
+
+    res.status(201).json({
+      success: true,
+      message: `"${singleKhata.name}" Marked As Read`,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+
+
+
+
+
+
 module.exports = {
   addCustomer,
   getAllKhatas,
@@ -349,4 +458,6 @@ module.exports = {
   getSingleUserKhataOneTransaction_DELETE,
   deleteOneUserKhata,
   addTransactionInKhtata,
+  setWasoliController,
+  setWasoliUndefinedController
 };

@@ -1,42 +1,43 @@
 import React, { useEffect, useState } from "react";
 import {
+  Badge,
   Box,
   IconButton,
-  ListItemIcon,
-  Menu,
-  MenuItem,
   Paper,
   Stack,
   Typography,
 } from "@mui/material";
+import MailIcon from "@mui/icons-material/Mail";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import LenaDena from "./laenaDena/LenaDena";
 import Searching from "./Searching/Searching";
 import UserList from "./User List/UserList";
 import "./khata.css";
 import EnterCustomer from "./EnterCustomer";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
 import { useDispatch, useSelector } from "react-redux";
 import getAllKhatasAction from "../../Redux/Actions/khata/getAllKhatas";
 import Loading from "../Loading/Loading";
+import { useNavigate } from "react-router-dom";
 // sx:0
 // sm:600
 // md:900
 // lg:1200
 
 const KhataDashboard = () => {
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [searchViaName, setSearchViaName] = useState("");
   const [filteredKhatas, setFilteredKhatas] = useState([]);
   const { khatas } = useSelector((state) => state.getAllKhatasSlice);
+  const { wasoliTrueKhatas } = useSelector((state) => state.getAllKhatasSlice);
+
+  const { generalLoading } = useSelector((state) => state.generalLoading);
 
   const searchFieldOnChangeHandler = (e) => {
     const { value } = e.target;
     setSearchViaName(value);
 
-   
     // Case-insensitive partial match search
     const filtered = khatas.filter((khata) =>
       khata.name.toLowerCase().includes(value.toLowerCase())
@@ -44,14 +45,6 @@ const KhataDashboard = () => {
 
     setFilteredKhatas(filtered);
   };
-
-  useEffect(() => {
-    if (searchViaName === "") {
-      setFilteredKhatas(khatas);
-    }
-  }, [khatas, searchViaName]);
-
-  const { generalLoading } = useSelector((state) => state.generalLoading);
 
   // < ------------------------ CALCULATING TOTAL  -------------->
 
@@ -70,15 +63,17 @@ const KhataDashboard = () => {
     });
   }
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const notificationHandler = () => {
+    navigate("/khata/notificationPage");
+  };
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  //TODO <-----------------  USEEFFECT --------------------->
+
+  useEffect(() => {
+    if (searchViaName === "") {
+      setFilteredKhatas(khatas);
+    }
+  }, [khatas, searchViaName]);
 
   useEffect(() => {
     dispatch(getAllKhatasAction());
@@ -129,69 +124,23 @@ const KhataDashboard = () => {
                   </Typography>
                 </Stack>
 
-                {/* manu start from here */}
-
-                {/* <IconButton
-                  onClick={handleClick}
-                  size="small"
-                  sx={{ ml: 2, width: "50px", height: "50px" }}
-                  aria-controls={open ? "account-menu" : undefined}
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                >
-                  <MoreVertIcon />
-                </IconButton>
-
-                <Menu
-                  anchorEl={anchorEl}
-                  id="account-menu"
-                  open={open}
-                  onClose={handleClose}
-                  onClick={handleClose}
-                  PaperProps={{
-                    elevation: 0,
-                    sx: {
-                      overflow: "visible",
-                      filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                      mt: 1.5,
-                      "& .MuiAvatar-root": {
-                        width: 32,
-                        height: 32,
-                        ml: -0.5,
-                        mr: 1,
-                      },
-                      "&:before": {
-                        content: '""',
-                        display: "block",
-                        position: "absolute",
-                        top: 0,
-                        right: 14,
-                        width: 10,
-                        height: 10,
-                        bgcolor: "background.paper",
-                        transform: "translateY(-50%) rotate(45deg)",
-                        zIndex: 0,
-                      },
-                    },
+                <IconButton
+                  onClick={notificationHandler}
+                  sx={{
+                    width: "50px",
+                    height: "50px",
+                    marginRight: "2rem",
+                    cursor: "pointer",
                   }}
-                  transformOrigin={{ horizontal: "right", vertical: "top" }}
-                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                 >
-                  <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <Settings fontSize="small" />
-                    </ListItemIcon>
-                    Settings
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <Logout fontSize="small" />
-                    </ListItemIcon>
-                    Logout
-                  </MenuItem>
-                </Menu> */}
-
-                {/* menu end here */}
+                  <Badge
+                    color="secondary"
+                    badgeContent={wasoliTrueKhatas.length}
+                    max={9}
+                  >
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
               </Stack>
             </Stack>
             <Stack

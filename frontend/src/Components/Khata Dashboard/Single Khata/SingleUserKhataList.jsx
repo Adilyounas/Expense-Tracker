@@ -18,6 +18,8 @@ const monthInitials = [
 ];
 
 const SingleUserKhataList = (props) => {
+const currencySymbol = JSON.parse(localStorage.getItem("currencySymbol"))
+
   const { khata } = props;
 
 let sortedKhataData = []
@@ -58,7 +60,7 @@ if (khata && khata.khataData) {
               <Grid item xs={3}>
                 <Typography textAlign={"center"} sx={{ color: "red" }}>
                   {transaction.type === "leneHan"
-                    ? `Rs:${transaction.amount}`
+                    ? `${currencySymbol}: ${transaction.amount}`
                     : ""}
                 </Typography>
               </Grid>
@@ -66,7 +68,7 @@ if (khata && khata.khataData) {
               <Grid item xs={3}>
                 <Typography textAlign={"center"} sx={{ color: "green" }}>
                   {transaction.type === "deneHan"
-                    ? `Rs:${transaction.amount}`
+                    ? `${currencySymbol}: ${transaction.amount}`
                     : ""}
                 </Typography>
               </Grid>

@@ -26,7 +26,7 @@ import delteSingleUserKhata_Action from "../../../Redux/Actions/khata/deleteSing
 
 const SingleKhata = () => {
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { generalLoading } = useSelector((state) => state.generalLoading);
@@ -61,9 +61,8 @@ const SingleKhata = () => {
 
   const deleteSingleWholeKhata = () => {
     setAnchorEl(null);
-    dispatch(delteSingleUserKhata_Action(id,navigate))
+    dispatch(delteSingleUserKhata_Action(id, navigate));
   };
-
 
   useEffect(() => {
     dispatch(getSingleUserKhataData_Action(id));
@@ -182,6 +181,9 @@ const SingleKhata = () => {
               alignItems={"center"}
             >
               <WasoliAndTotal
+                khata={khata}
+
+                khataId={id}
                 leneHanTotal={leneHanTotal}
                 deneHanTotal={deneHanTotal}
               />
@@ -212,7 +214,7 @@ const SingleKhata = () => {
             <Stack
               sx={{
                 p: "0.3rem 2rem",
-                maxHeight: { xs: "300px"},
+                maxHeight: { xs: "300px" },
                 overflowY: "auto", // Enable vertical scrolling
                 "&::-webkit-scrollbar": {
                   width: "0em",

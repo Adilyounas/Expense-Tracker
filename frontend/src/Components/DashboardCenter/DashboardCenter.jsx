@@ -143,8 +143,7 @@ const DashboardCenter = (props) => {
           )}
         </NavLink>
 
-        <div id="detailsInPercentage_box">
-          {/* <Box component={"h2"}></Box> */}
+        {/* <div id="detailsInPercentage_box">
 
           <Box component={"div"} textAlign={"center"}>
             <h2 id="base">Monthly Base</h2>
@@ -187,7 +186,7 @@ const DashboardCenter = (props) => {
               </Box>
             </div>
           </Box>
-        </div>
+        </div> */}
         <div id="actionAndDetails_box">
           {modules.map((ele) => (
             <NavLink key={ele.id} to={ele.link}>

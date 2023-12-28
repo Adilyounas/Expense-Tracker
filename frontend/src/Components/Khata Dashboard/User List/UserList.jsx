@@ -6,6 +6,8 @@ import { NavLink } from "react-router-dom";
 
 
 const UserList = (props) => {
+const currencySymbol = JSON.parse(localStorage.getItem("currencySymbol"))
+
   const {khatas} = props
 
 
@@ -31,7 +33,7 @@ const UserList = (props) => {
                 </Avatar>
                 <Typography sx={{ color: "black" }}>{user.name}</Typography>
               </Stack>
-              <Typography sx={{color:leneHanAmount>deneHanAmount?"red":"green"   }}>Rs: {leneHanAmount>deneHanAmount?leneHanAmount:deneHanAmount}</Typography>
+              <Typography sx={{color:leneHanAmount>deneHanAmount?"red":"green"   }}>{currencySymbol}: {leneHanAmount>deneHanAmount?leneHanAmount:deneHanAmount}</Typography>
             </NavLink>
             <Divider
               sx={{

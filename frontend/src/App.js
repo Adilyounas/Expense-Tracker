@@ -24,8 +24,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import EditUserKhata from "./Components/Khata Dashboard/Single Khata/EditUserKhata";
 import MaineKuchKiya from "./Components/Khata Dashboard/Single Khata/MaineKuchKiya";
 import EditTransactionSingle from "./Components/Khata Dashboard/Single Khata/EditTransaction";
-
-
+import NotificationComponent from "./Components/Khata Dashboard/Notification/NotificationComponent";
 
 function App() {
   const dispatch = useDispatch();
@@ -67,9 +66,15 @@ function App() {
             path="/paymentModes"
             element={!userFound ? <Login /> : <PaymentModes />}
           />
+
           <Route
             path="/khata"
             element={!userFound ? <Login /> : <KhataDashboard />}
+          />
+
+          <Route
+            path="/khata/notificationPage"
+            element={!userFound ? <Login /> : <NotificationComponent />}
           />
 
           <Route

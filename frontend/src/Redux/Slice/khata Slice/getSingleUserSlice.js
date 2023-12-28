@@ -11,6 +11,7 @@ export const singleUserKhataDataSlice = createSlice({
     singleUserKhataDataReducer: (state, actions) => {
       state.khata = actions.payload;
     },
+   
   },
 });
 
