@@ -23,6 +23,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import EditUserKhata from "./Components/Khata Dashboard/Single Khata/EditUserKhata";
 import MaineKuchKiya from "./Components/Khata Dashboard/Single Khata/MaineKuchKiya";
+import EditTransactionSingle from "./Components/Khata Dashboard/Single Khata/EditTransaction";
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -91,8 +94,8 @@ function App() {
           />
 
           <Route
-            path="/editSingle-Khata/:id"
-            element={!userFound ? <Login /> : <EditUserKhata />}
+            path="/editSingle-Khata/:khataId"
+            element={!userFound ? <Login /> : <EditTransactionSingle />}
           />
 
           <Route

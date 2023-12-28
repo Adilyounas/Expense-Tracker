@@ -5,6 +5,10 @@ import All_IncomeAndExpenseSlice from "./Redux/Slice/All_IncomeAndExpenseSlice";
 import SingleTransaction from "./Redux/Slice/singleTransaction";
 import DeleteSingleTransactionSlice  from "./Redux/Slice/deleteTransaction";
 import  GetUserData  from "./Redux/Slice/userDetails_Slice";
+import getAllKhatasSlice from "./Redux/Slice/khata Slice/getAllKhataSlice"
+import singleUserKhataDataSlice from "./Redux/Slice/khata Slice/getSingleUserSlice"
+import singleUserKhataDataSingleTransaction_Slice from "./Redux/Slice/khata Slice/getSingleUserKhataSingleTransaction"
+
 
 const store = configureStore({
   reducer: {
@@ -13,7 +17,10 @@ const store = configureStore({
     All_IncomeAndExpenseSlice,
     SingleTransaction,
     DeleteSingleTransactionSlice,
-    GetUserData
+    GetUserData,
+    getAllKhatasSlice,
+    singleUserKhataDataSlice,
+    singleUserKhataDataSingleTransaction_Slice
   },
 });
 

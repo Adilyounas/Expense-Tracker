@@ -1,12 +1,19 @@
-import { IconButton, InputAdornment, TextField } from "@mui/material";
+import {  InputAdornment, TextField } from "@mui/material";
 import React from "react";
 import LocationSearchingIcon from "@mui/icons-material/LocationSearching";
-import FilterAltIcon from "@mui/icons-material/FilterAlt";
 
-const Searching = () => {
+const Searching = (props) => {
+
+  const {searchViaName, searchFieldOnChangeHandler} = props
+
+
+
+
   return (
     <>
       <TextField
+      value={searchViaName}
+      onChange={searchFieldOnChangeHandler}
         InputProps={{
           sx: {
             paddingBottom: "13px",
@@ -19,13 +26,13 @@ const Searching = () => {
               <LocationSearchingIcon />
             </InputAdornment>
           ),
-          endAdornment: (
-            <InputAdornment position="start">
-              <IconButton>
-                <FilterAltIcon color="warning" />
-              </IconButton>
-            </InputAdornment>
-          ),
+          // endAdornment: (
+          //   <InputAdornment position="start">
+          //     <IconButton>
+          //       <FilterAltIcon color="warning" />
+          //     </IconButton>
+          //   </InputAdornment>
+          // ),
         }}
         id="standard-basic"
         variant="standard"

@@ -2,7 +2,7 @@ import { Box,  Stack, Typography } from "@mui/material";
 import React from "react";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import { green,  red } from "@mui/material/colors";
+import { green,  grey,  red } from "@mui/material/colors";
 import { NavLink } from "react-router-dom";
 import { styled } from "@mui/system";
 
@@ -53,6 +53,7 @@ const EnterKhataAmount = (props) => {
         height: "10vh",
         width: "100%",
         p: "0.3rem 2rem",
+        bgcolor:grey[100]
       }}
     >
       <Stack
@@ -64,11 +65,11 @@ const EnterKhataAmount = (props) => {
         justifyContent={"space-between"}
       >
         <StyledNavLink to={`/MAINE-DIEY/${userId}`   }>
-          <ArrowDownwardIcon />
+          <ArrowUpwardIcon />
           <Typography>MAINE DIEY</Typography>
         </StyledNavLink>
         <StyledNavLink2 to={`/MAINE-LIYE/${userId}`}>
-          <ArrowUpwardIcon />
+          <ArrowDownwardIcon />
           <Typography>MAINE LIYE</Typography>
         </StyledNavLink2>
       </Stack>

@@ -39,7 +39,7 @@ const modules = [
     label: "Report",
   },
   {
-    id: 4,
+    id: 5,
     link: "/khata",
     icon: <AutoStoriesIcon />,
     label: "Khata",

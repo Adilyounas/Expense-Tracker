@@ -1,69 +1,6 @@
-import {  Divider, Grid, Typography } from "@mui/material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import React from "react";
 import { NavLink } from "react-router-dom";
-
-const data = [
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    diye: 100,
-  },
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    liye: 20,
-  },
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    diye: 100,
-  },
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    diye: 100,
-  },
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    liye: 20,
-  },
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    diye: 100,
-  },
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    diye: 100,
-  },
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    liye: 20,
-  },
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    diye: 100,
-  },
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    diye: 100,
-  },
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    liye: 20,
-  },
-  {
-    id: Math.random() * 1000,
-    date: new Date(),
-    diye: 100,
-  },
-];
 
 const monthInitials = [
   "Jan",
@@ -80,45 +17,70 @@ const monthInitials = [
   "Dec",
 ];
 
-const SingleUserKhataList = () => {
+const SingleUserKhataList = (props) => {
+  const { khata } = props;
+
+let sortedKhataData = []
+if (khata && khata.khataData) {
+  sortedKhataData = khata.khataData.slice().sort((a, b) => b.transactionKhataPriority - a.transactionKhataPriority);
+  
+}
+
   return (
     <>
-      {data.map((user) => (
-        <NavLink
-        to={`/editSingle-Khata/${user.id}`}
-          key={user.id}
-          style={{ textDecoration: "none", color: "black" }}
-        >
-          <Grid container p={2}>
-            <Grid item xs={6}>
-              <Typography>{`${user.date.getDate()} ${
-                monthInitials[user.date.getMonth()]
-              }, ${
-                user.date.getHours() > 12
-                  ? user.date.getHours() - 12
-                  : user.date.getHours()
-              }:${user.date.getMinutes()} ${
-                user.date.getHours() > 12 ? "PM" : "AM"
-              }   `}</Typography>
+      {khata &&
+        khata.khataData &&
+        khata.khataData && sortedKhataData ? (sortedKhataData.map((transaction) => (
+          <NavLink
+            to={`/editSingle-Khata/${khata._id}?id=${transaction._id}`}
+            key={transaction._id}
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Grid container p={2}>
+              <Grid item xs={6}>
+                <Typography>{`${new Date(
+                  transaction.transactionDate
+                ).getDate()} ${
+                  monthInitials[
+                    new Date(transaction.transactionDate).getMonth()
+                  ]
+                }, ${
+                  new Date(transaction.transactionDate).getHours() > 12
+                    ? new Date(transaction.transactionDate).getHours() - 12
+                    : new Date(transaction.transactionDate).getHours()
+                }:${new Date(transaction.transactionDate).getMinutes()} ${
+                  new Date(transaction.transactionDate).getHours() > 12
+                    ? "PM"
+                    : "AM"
+                }   `}</Typography>
+              </Grid>
+
+              <Grid item xs={3}>
+                <Typography textAlign={"center"} sx={{ color: "red" }}>
+                  {transaction.type === "leneHan"
+                    ? `Rs:${transaction.amount}`
+                    : ""}
+                </Typography>
+              </Grid>
+
+              <Grid item xs={3}>
+                <Typography textAlign={"center"} sx={{ color: "green" }}>
+                  {transaction.type === "deneHan"
+                    ? `Rs:${transaction.amount}`
+                    : ""}
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={3}>
-              <Typography textAlign={"center"}>
-                {user.diye ? "Rs:" : ""}
-                {user.diye ? user.diye : ""}
-              </Typography>
-            </Grid>
-            <Grid item xs={3}>
-              <Typography textAlign={"center"}>
-                {user.liye ? "Rs:" : ""}
-                {user.liye ? user.liye : ""}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Divider />
-        </NavLink>
-      ))}
+            <Divider />
+          </NavLink>
+        ))):(<Box>No data fount</Box> )
+        }
     </>
   );
 };
+
+
+ 
+
 
 export default SingleUserKhataList;
