@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -19,8 +19,8 @@ import addCustomerAction from "../../../Redux/Actions/khata/addCustomer";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../Loading/Loading";
 
+import PhoneInput, { parsePhoneNumber } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
-import PhoneInput from "react-phone-number-input";
 import "./editUserKhata.css";
 
 const EditUserKhata = () => {
@@ -38,8 +38,31 @@ const EditUserKhata = () => {
 
   const [numberVal, setNumberVal] = useState("");
 
+  const [error, setError] = useState("");
+
+  const handleChange = (value) => {
+    if (typeof value === "string") {
+      const phoneNumber = parsePhoneNumber(value);
+      if (!phoneNumber || !phoneNumber.country) {
+        setError("Please enter a country code.");
+      } else {
+        setError("");
+      }
+      setNumberVal(value);
+    } else {
+      setError("Please enter a valid phone number.");
+    }
+  };
+
   const FormSubmitHandler = (e) => {
     e.preventDefault();
+
+    // Check if there's an error before submitting the form
+    if (error) {
+      alert("Please fix the errors before submitting the form.");
+      return;
+    }
+
     const formData = {
       name: nameVal,
       number: numberVal,
@@ -51,12 +74,10 @@ const EditUserKhata = () => {
 
     dispatch(addCustomerAction(formData));
 
-    setTimeout(() => {
-      setNameVal("");
-      setNumberVal("");
-      setAmountVal("");
-      setCheckedVal("leneHan");
-    }, 1000);
+    setNameVal("");
+    setNumberVal("");
+    setAmountVal("");
+    setCheckedVal("leneHan");
   };
 
   return (
@@ -143,11 +164,14 @@ const EditUserKhata = () => {
                   />
                 </Stack>
 
-                <PhoneInput
-                  placeholder="Enter phone number"
-                  value={numberVal}
-                  onChange={setNumberVal}
-                />
+                <Box textAlign={"center"}>
+                  <PhoneInput
+                    placeholder="Enter phone number"
+                    value={numberVal}
+                    onChange={handleChange}
+                  />
+                  {error && <div style={{ color: "red" }}>{error}</div>}
+                </Box>
 
                 <Stack direction={"row"} spacing={2} alignItems={"center"}>
                   <MonetizationOnIcon sx={{ color: "rgb(77 77 77)" }} />

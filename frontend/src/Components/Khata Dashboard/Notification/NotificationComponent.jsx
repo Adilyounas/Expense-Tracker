@@ -2,28 +2,18 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getAllKhatasAction from "../../../Redux/Actions/khata/getAllKhatas";
 import Loading from "../../Loading/Loading";
-import {
-  Box,
-  Divider,
-  IconButton,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, IconButton, Paper, Stack, Typography } from "@mui/material";
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 import { useNavigate } from "react-router-dom";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { WasoliUndefined_Action } from "../../../Redux/Actions/khata/Wasoli";
+
+import PriceCheckIcon from "@mui/icons-material/PriceCheck";
 
 const NotificationComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { generalLoading } = useSelector((state) => state.generalLoading);
   const { wasoliTrueKhatas } = useSelector((state) => state.getAllKhatasSlice);
-
-  const manageNotificationHandler = (khataId) => {
-    console.log(khataId);
-  };
 
   const markAsReadAndNavigateHandler = (khataId) => {
     if (khataId) {
@@ -91,7 +81,7 @@ const NotificationComponent = () => {
 
             {/* list of wasoli khatas */}
 
-            <Stack spacing={2} p={4}>
+            <Stack spacing={2} p={"1rem 3rem"}>
               {wasoliTrueKhatas && wasoliTrueKhatas.length > 0 ? (
                 wasoliTrueKhatas.map((khata) => {
                   return (
@@ -109,21 +99,21 @@ const NotificationComponent = () => {
                             textDecoration: "none",
                             color: "black",
                             width: "80%",
-                            padding: "0 2rem",
+                            padding: "0 1rem",
                             cursor: "pointer",
                           }}
                         >
                           <Typography>{khata.name}</Typography>
                         </Box>
 
-                        {/* <Box
-                          width={"10%"}
-                          onClick={() => manageNotificationHandler(khata._id)}
+                        <IconButton
+                          sx={{
+                            width: "50px",
+                            height: "50px",
+                          }}
                         >
-                          <IconButton sx={{ width: "40px", height: "40px" }}>
-                            <MoreVertIcon />
-                          </IconButton>
-                        </Box> */}
+                          <PriceCheckIcon />
+                        </IconButton>
                       </Stack>
                       <hr
                         style={{

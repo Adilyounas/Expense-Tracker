@@ -1,11 +1,10 @@
 import { Box, IconButton, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import DownloadingIcon from "@mui/icons-material/Downloading";
 import { green, red } from "@mui/material/colors";
 import { DatePicker } from "@mui/x-date-pickers";
 import CheckIcon from "@mui/icons-material/Check";
 import { styled } from "@mui/system";
-import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Wasoli_Action from "../../../Redux/Actions/khata/Wasoli";
 import dayjs from "dayjs";
@@ -29,13 +28,13 @@ const StyledDatePicker = styled(DatePicker)({
 
 // < --------------  WASOLI DATE  ----------------->
 
-const wasoliDate = JSON.parse(localStorage.getItem("wasoliDate"))
+const wasoliDate = JSON.parse(localStorage.getItem("wasoliDate"));
 if (!wasoliDate) {
   localStorage.setItem("wasoliDate", JSON.stringify([]));
 }
 
 const WasoliAndTotal = (props) => {
-const currencySymbol = JSON.parse(localStorage.getItem("currencySymbol"))
+  const currencySymbol = JSON.parse(localStorage.getItem("currencySymbol"));
 
   const dispatch = useDispatch();
 
@@ -56,10 +55,8 @@ const currencySymbol = JSON.parse(localStorage.getItem("currencySymbol"))
   const { generalLoading } = useSelector((state) => state.generalLoading);
 
   const [selectedDate, setSelectedDate] = useState(
-    khata && khata.wasoliDate ? dayjs(khata && khata.wasoliDate) : null
+    khata && khata.wasoliDate ? dayjs(khata.wasoliDate) : dayjs()
   );
-
-  // console.log(selectedDate!==null?selectedDate.getDate():"error");
 
   const setWasoliCheckHandler = () => {
     if (selectedDate === dayjs(khata.wasoliDate) || selectedDate === null) {
@@ -133,9 +130,9 @@ const currencySymbol = JSON.parse(localStorage.getItem("currencySymbol"))
 
           <Stack direction={"row"} alignItems={"center"} spacing={1}>
             <StyledDatePicker
-              //  views={["day", "month"]}
+              minDate={dayjs()}
               value={selectedDate}
-              onChange={(newValue) => setSelectedDate(newValue.$d)}
+              onChange={(newValue) => setSelectedDate(newValue)}
               sx={{
                 width: "145px",
                 display: lenaD > denaD ? "block" : "none",
@@ -144,7 +141,11 @@ const currencySymbol = JSON.parse(localStorage.getItem("currencySymbol"))
             />
 
             <IconButton
-              sx={{ width: "40px", height: "40px" }}
+              sx={{
+                width: "40px",
+                height: "40px",
+                display: lenaD > denaD ? "flex" : "none",
+              }}
               onClick={setWasoliCheckHandler}
             >
               <CheckIcon />
